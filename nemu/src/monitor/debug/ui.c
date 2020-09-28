@@ -48,10 +48,10 @@ extern uint8_t *hw_mem;
 
 static int cmd_x(char *args) {
     int step = 0, i, base = 0;
-    for (; args[i]; ++i) {
+    for (; args[i]!=' '; ++i) {
         step = args[i] - '0' + step * 10;
     }
-    i += 2;
+    i += 3;
     for (; args[i]; ++i) {
         if (args[i] >= 'a' && args[i] <= 'f')base = args[i] - 'a' + 10 + base * 16;
         else base = args[i] - '0' + base * 16;
