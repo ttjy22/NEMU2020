@@ -44,17 +44,35 @@ static int cmd_si(char *args) {
 
 static int cmd_help(char *args);
 
+extern uint8_t *hw_mem;
+
+static int cmd_x(char *args) {
+    int step = 0, i, base = 0;
+    for (; args[i]; ++i) {
+        step = args[i] - '0' + step * 10;
+    }
+    i += 2;
+    for (; args[i]; ++i) {
+        if (args[i] >= 'a' && args[i] <= 'f')base = args[i] - 'a' + 10 + base * 16;
+        else base = args[i] - '0' + base * 16;
+    }
+    for (i = 0; i < step; ++i) {
+        printf("%d\n", *(hw_mem + base + i * 4));
+    }
+    return 0;
+}
+
 extern CPU_state cpu;
 
 static int cmd_info(char *args) {
-    printf("%d\n", cpu.eax);
-    printf("%d\n", cpu.ecx);
-    printf("%d\n", cpu.edx);
-    printf("%d\n", cpu.ebx);
-    printf("%d\n", cpu.esp);
-    printf("%d\n", cpu.ebp);
-    printf("%d\n", cpu.esi);
-    printf("%d\n", cpu.edi);
+    printf("eax : 0x%x\n", cpu.eax);
+    printf("ecx : 0x%x\n", cpu.ecx);
+    printf("edx : 0x%x\n", cpu.edx);
+    printf("ebx : 0x%x\n", cpu.ebx);
+    printf("esp : 0x%x\n", cpu.esp);
+    printf("ebp : 0x%x\n", cpu.ebp);
+    printf("esi : 0x%x\n", cpu.esi);
+    printf("edi : 0x%x\n", cpu.edi);
     return 0;
 }
 
@@ -69,7 +87,7 @@ static struct {
         {"q",    "Exit NEMU",                                         cmd_q},
         {"si",   "Step Into NEMU",                                    cmd_si},
         {"info", "print NEMU",                                        cmd_info},
-//        {"x",    "scan NEMU",                                         cmd_x},
+        {"x",    "scan NEMU",                                         cmd_x},
 
         /* TODO: Add more commands */
 
