@@ -56,6 +56,8 @@ static int cmd_x(char *args) {
         if (args[i] >= 'a' && args[i] <= 'f')base = args[i] - 'a' + 10 + base * 16;
         else base = args[i] - '0' + base * 16;
     }
+    printf("%d\n", step);
+    printf("%d\n", base);
     for (i = 0; i < step; ++i) {
         printf("%d\n", *(hw_mem + base + i * 4));
     }
