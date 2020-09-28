@@ -35,8 +35,10 @@ static int cmd_c(char *args) {
 static int cmd_q(char *args) {
     return -1;
 }
-
+extern uint32_t expr(char *e, bool *success);
 static int cmd_si(char *args) {
+bool success;
+	expr(args,&success);
     if (!args)cpu_exec(1);
     else cpu_exec(atoi(args));
     return 0;
