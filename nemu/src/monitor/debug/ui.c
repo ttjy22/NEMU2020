@@ -37,7 +37,7 @@ static int cmd_q(char *args) {
 }
 
 static int cmd_si(char *args) {
-    printf("%d\n", 5668);
+    cpu_exec(atoi(args));
     return 0;
 }
 
@@ -52,8 +52,8 @@ static struct {
         {"help", "Display informations about all supported commands", cmd_help},
         {"c",    "Continue the execution of the program",             cmd_c},
         {"q",    "Exit NEMU",                                         cmd_q},
-        {"si",    "Step Into NEMU",                                         cmd_si},
-//        {"info",    "print NEMU",                                         cmd_info},
+        {"si",   "Step Into NEMU",                                    cmd_si},
+//        {"info", "print NEMU",                                        cmd_info},
 //        {"x",    "scan NEMU",                                         cmd_x},
 
         /* TODO: Add more commands */
