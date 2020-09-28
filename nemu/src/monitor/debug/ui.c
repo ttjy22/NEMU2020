@@ -47,26 +47,17 @@ static int cmd_help(char *args);
 extern uint8_t *hw_mem;
 
 static int cmd_x(char *args) {
-    printf("%s\n", args);
     int step = 0, i, base = 0;
-    printf("-----------------------------------\n");
     for (i = 0; args[i] != ' '; ++i) {
         step = args[i] - '0' + step * 10;
-        printf("%d\n", step);
     }
-    printf("-----------------------------------\n");
     i += 3;
     for (; args[i]; ++i) {
         if (args[i] >= 'a' && args[i] <= 'f')base = args[i] - 'a' + 10 + base * 16;
         else base = args[i] - '0' + base * 16;
-        printf("%d\n", base);
     }
-    printf("-----------------------------------\n");
-
-    printf("%d\n", step);
-    printf("%d\n", base);
     for (i = 0; i < step; ++i) {
-        printf("%d\n", *(hw_mem + base + i * 4));
+        printf("0x%x\n", *(hw_mem + base + i * 4));
     }
     return 0;
 }
