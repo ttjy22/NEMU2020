@@ -37,12 +37,26 @@ static int cmd_q(char *args) {
 }
 
 static int cmd_si(char *args) {
-    if(!args)cpu_exec(1);
+    if (!args)cpu_exec(1);
     else cpu_exec(atoi(args));
     return 0;
 }
 
 static int cmd_help(char *args);
+
+extern CPU_state cpu;
+
+static int cmd_info(char *args) {
+    printf("%d\n", cpu.eax);
+    printf("%d\n", cpu.ecx);
+    printf("%d\n", cpu.edx);
+    printf("%d\n", cpu.ebx);
+    printf("%d\n", cpu.esp);
+    printf("%d\n", cpu.ebp);
+    printf("%d\n", cpu.esi);
+    printf("%d\n", cpu.edi);
+    return 0;
+}
 
 static struct {
     char *name;
@@ -54,7 +68,7 @@ static struct {
         {"c",    "Continue the execution of the program",             cmd_c},
         {"q",    "Exit NEMU",                                         cmd_q},
         {"si",   "Step Into NEMU",                                    cmd_si},
-//        {"info", "print NEMU",                                        cmd_info},
+        {"info", "print NEMU",                                        cmd_info},
 //        {"x",    "scan NEMU",                                         cmd_x},
 
         /* TODO: Add more commands */
