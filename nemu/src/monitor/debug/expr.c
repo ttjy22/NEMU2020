@@ -81,10 +81,10 @@ static bool make_token(char *e) {
         for (i = 0; i < NR_REGEX; i++) {
             if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
                 if (rules[i].token_type == '-' && *(e + position + 1) - '0' >= 0 && *(e + position + 1) - '9' <= 0 &&
-                    (!position || (i && tokens[i - 1].type != VAL))) {
+                    (!nr_token || tokens[nr_token - 1].type != VAL)) {
                     continue;
                 }
-                if (rules[i].token_type == '*' && (!position || !strcmp(tokens[i - 1].str, "OP"))) {
+                if (rules[i].token_type == '*' && (!nr_token || !strcmp(tokens[nr_token - 1].str, "OP"))) {
                     continue;
                 }
                 char *substr_start = e + position;
@@ -92,7 +92,7 @@ static bool make_token(char *e) {
 
                 Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s", i, rules[i].regex, position,
                     substr_len, substr_len, substr_start);
-                i?printf("%d\n", tokens[i - 1].type):puts("");
+//                i?printf("%d\n", tokens[i - 1].type):puts("");
 
                 position += substr_len;
 
