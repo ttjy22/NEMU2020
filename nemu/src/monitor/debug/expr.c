@@ -84,6 +84,7 @@ static bool make_token(char *e) {
 
                 switch (rules[i].token_type) {
                     case '+':
+                        printf("+" );
                         break;
                     case '-':
                         break;
@@ -97,7 +98,6 @@ static bool make_token(char *e) {
                         break;
 
                 }
-
                 break;
             }
         }
