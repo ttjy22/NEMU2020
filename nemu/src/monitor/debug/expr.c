@@ -7,7 +7,7 @@
 #include <regex.h>
 
 enum {
-    NOTYPE = 256, EQ, NQ, NUM, NOT, AND, OR, DEREF
+    NOTYPE = 256, NUM,NOT,EQ,NE,AND,OR, DEREF
 
     /* TODO: Add more token types */
 
@@ -29,13 +29,13 @@ static struct rule {
         {"\\/",               '/'},                    // plus
         {"\\(",               '('},                    // plus
         {"\\)",               ')'},                    // plus
-        {"==",                EQ},                     // equal
-        {"!=",                NQ},
         {"(0|-?[1-9][0-9]*)", NUM},                    // plus
+        {"\\*",               DEREF},                       // equal
         {"!",                 NOT},                     // equal
         {"&&",                AND},                     // equal
         {"||",                OR},
-        {"\\*",                 DEREF},                       // equal
+        {"==",                EQ},                     // equal
+        {"!=",                NE},
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -82,7 +82,8 @@ static bool make_token(char *e) {
                     (!i || tokens[i - 2].type != NUM)) {
                     continue;
                 }
-                if (rules[i].token_type == '*' &&(!i || (*(e + position + 1) - '0' < 0 && *(e + position + 1) - '9' > 0))) {
+                if (rules[i].token_type == '*' && (!i || (tokens[i - 2].type != '+' && tokens[i - 2].type != '-' &&
+                                                          tokens[i - 2].type != '/' && tokens[i - 2].type != '*'))) {
                     continue;
                 }
                 char *substr_start = e + position;
@@ -98,11 +99,6 @@ static bool make_token(char *e) {
                  */
                 nr_token++;
                 switch (rules[i].token_type) {
-                    case NOTYPE:
-                        break;
-                    case EQ:
-//                        tokens[nr_token].type = '+';
-                        break;
                     case NUM:
                         tokens[nr_token].type = rules[i].token_type, strcpy(tokens[nr_token].str, " "), strncpy(
                                 tokens[nr_token].str, substr_start,
