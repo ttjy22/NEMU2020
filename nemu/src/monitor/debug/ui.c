@@ -53,12 +53,24 @@ extern Token tokens[32];
 extern int nr_token;
 #define N 33
 int stk_op[N], stk_n[N], t_op, t_n;
+enum {
+    NOT = 256, DEREF, EQ, NE, AND, OR, NOTYPE, NUM
+
+    /* TODO: Add more token types */
+
+};
 
 int getrank(int tp) {
     if (tp == '+')return 0;
     if (tp == '-')return 1;
     if (tp == '*')return 2;
     if (tp == '/')return 3;
+    if (tp == NOT)return 4;
+    if (tp == DEREF)return 5;
+    if (tp == EQ)return 6;
+    if (tp == NE)return 7;
+    if (tp == AND)return 8;
+    if (tp == OR)return 9;
     return -1;
 }
 
@@ -67,24 +79,36 @@ static int count() {
         if (tokens[i].type < 256) {
             if (tokens[i].type == '(')stk_op[++t_op] = '(';
             else if (tokens[i].type == ')') {
-                while (t_op&&stk_op[t_op--] != '(') {
+                while (t_op && stk_op[t_op--] != '(') {
                     int tp = stk_op[t_op + 1];
 //                    printf("stk_op:    %d\n", tp);
                     int a = stk_n[t_n--], b = stk_n[t_n];
+//                    if (tp == DEREF)stk_n[++t_n] = (*a);
+                    if (tp == NOT)stk_n[++t_n] = !a;
                     if (tp == '+')stk_n[t_n] = a + b;
                     if (tp == '-')stk_n[t_n] = b - a;
                     if (tp == '*')stk_n[t_n] = a * b;
                     if (tp == '/')stk_n[t_n] = b / a;
+                    if (tp == EQ)stk_n[t_n] = a == b;
+                    if (tp == NE)stk_n[t_n] = a != b;
+                    if (tp == AND)stk_n[t_n] = a && b;
+                    if (tp == OR)stk_n[t_n] = a || b;
                 }
             } else {
-                while (t_op&&getrank(stk_op[t_op]) > getrank(tokens[i].type)) {
+                while (t_op && getrank(stk_op[t_op]) > getrank(tokens[i].type)) {
                     int tp = stk_op[t_op--];
 //                    printf("stk_op:    %d\n", tp);
                     int a = stk_n[t_n--], b = stk_n[t_n];
+//                    if (tp == DEREF)stk_n[++t_n] = (*a);
+                    if (tp == NOT)stk_n[++t_n] = !a;
                     if (tp == '+')stk_n[t_n] = a + b;
                     if (tp == '-')stk_n[t_n] = b - a;
                     if (tp == '*')stk_n[t_n] = a * b;
                     if (tp == '/')stk_n[t_n] = b / a;
+                    if (tp == EQ)stk_n[t_n] = a == b;
+                    if (tp == NE)stk_n[t_n] = a != b;
+                    if (tp == AND)stk_n[t_n] = a && b;
+                    if (tp == OR)stk_n[t_n] = a || b;
                 }
                 stk_op[++t_op] = tokens[i].type;
             }
@@ -97,10 +121,16 @@ static int count() {
         int tp = stk_op[t_op--];
 //        printf("stk_op:    %d\n", tp);
         int a = stk_n[t_n--], b = stk_n[t_n];
+//        if (tp == DEREF)stk_n[++t_n] = (*a);
+        if (tp == NOT)stk_n[++t_n] = !a;
         if (tp == '+')stk_n[t_n] = a + b;
         if (tp == '-')stk_n[t_n] = b - a;
         if (tp == '*')stk_n[t_n] = a * b;
         if (tp == '/')stk_n[t_n] = b / a;
+        if (tp == EQ)stk_n[t_n] = a == b;
+        if (tp == NE)stk_n[t_n] = a != b;
+        if (tp == AND)stk_n[t_n] = a && b;
+        if (tp == OR)stk_n[t_n] = a || b;
     }
     return stk_n[t_n];
 }
@@ -108,7 +138,7 @@ static int count() {
 extern uint32_t expr(char *e, bool *success);
 
 static int cmd_p(char *args) {
-    bool success=true;
+    bool success = true;
     expr(args, &success);
     if (success)printf("%d\n", count());
     return 0;
