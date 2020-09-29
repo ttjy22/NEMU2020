@@ -22,22 +22,22 @@ static struct rule {
          * Pay attention to the precedence level of different rules.
          */
 
-        {" +",                NOTYPE},                // spaces
-        {"\\+",               '+'},                    // plus
-        {"\\-",               '-'},                    // plus
-        {"\\*",               '*'},                    // plus
-        {"\\/",               '/'},                    // plus
-        {"\\(",               '('},                    // plus
-        {"\\)",               ')'},                    // plus
-        {"0x",                HEC},
-        {"\\*",               DEREF},                       // equal
-        {"==",                EQ},                     // equal
-        {"!=",                NE},
-        {"!",                 NOT},                     // equal
-        {"&&",                AND},                     // equal
-        {"\\|\\|",            OR},
-        {"\\$",                 REG},
-        {"(0|-?[1-9|a-f][0-9|a-f]*|[a-z]{3})",          VAL},
+        {" +",                                 NOTYPE},                // spaces
+        {"\\+",                                '+'},                    // plus
+        {"\\-",                                '-'},                    // plus
+        {"\\*",                                '*'},                    // plus
+        {"\\/",                                '/'},                    // plus
+        {"\\(",                                '('},                    // plus
+        {"\\)",                                ')'},                    // plus
+        {"0x",                                 HEC},
+        {"\\*",                                DEREF},                       // equal
+        {"==",                                 EQ},                     // equal
+        {"!=",                                 NE},
+        {"!",                                  NOT},                     // equal
+        {"&&",                                 AND},                     // equal
+        {"\\|\\|",                             OR},
+        {"\\$",                                REG},
+        {"(0|-?[1-9|a-f][0-9|a-f]*|[a-z]{3})", VAL},
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -81,7 +81,7 @@ static bool make_token(char *e) {
         for (i = 0; i < NR_REGEX; i++) {
             if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
                 if (rules[i].token_type == '-' && *(e + position + 1) - '0' >= 0 && *(e + position + 1) - '9' <= 0 &&
-                    (!position || tokens[i - 1].type != VAL)) {
+                    (!position || (i && tokens[i - 1].type != VAL))) {
                     continue;
                 }
                 if (rules[i].token_type == '*' && (!position || !strcmp(tokens[i - 1].str, "OP"))) {
@@ -90,8 +90,8 @@ static bool make_token(char *e) {
                 char *substr_start = e + position;
                 int substr_len = pmatch.rm_eo;
 
-                Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s", i, rules[i].regex, position,
-                    substr_len, substr_len, substr_start);
+//                Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s", i, rules[i].regex, position,
+//                    substr_len, substr_len, substr_start);
                 position += substr_len;
 
                 /* TODO: Now a new token is recognized with rules[i]. Add codes
