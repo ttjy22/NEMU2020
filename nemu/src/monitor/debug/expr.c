@@ -22,16 +22,16 @@ static struct rule {
          * Pay attention to the precedence level of different rules.
          */
 
-        {" +",          NOTYPE},                // spaces
-        {"\\+",         '+'},                    // plus
-        {"\\-",         '-'},                    // plus
-        {"\\*",         '*'},                    // plus
-        {"\\/",         '/'},                    // plus
-        {"\\(",         '('},                    // plus
-        {"\\)",         ')'},                    // plus
+        {" +",              NOTYPE},                // spaces
+        {"\\+",             '+'},                    // plus
+        {"\\-",             '-'},                    // plus
+        {"\\*",             '*'},                    // plus
+        {"\\/",             '/'},                    // plus
+        {"\\(",             '('},                    // plus
+        {"\\)",             ')'},                    // plus
         {"(0|[1-9][0-9]*)", NUM},                    // plus
-        {"==",          EQ},                     // equal
-        {"!=",          NQ}                        // equal
+        {"==",              EQ},                     // equal
+        {"!=",              NQ}                        // equal
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -87,21 +87,31 @@ static bool make_token(char *e) {
                  */
                 nr_token++;
                 switch (rules[i].token_type) {
-                    case '+':
-//                        tokens[nr_token] = { '+',substr_start};
+//                    case '+':
+//                        tokens[nr_token].type = '+', strcpy(tokens[nr_token].str, " ");
+//                        break;
+//                    case '-':
+//                        tokens[nr_token].type = '-', strcpy(tokens[nr_token].str, " ");
+//                        break;
+//                    case '*':
+//                        tokens[nr_token].type = '*', strcpy(tokens[nr_token].str, " ");
+//                        break;
+//                    case '/':
+//                        tokens[nr_token].type = '/', strcpy(tokens[nr_token].str, " ");
+//                        break;
+//                    case NOTYPE:
+//                        break;
+//                    case EQ:
+//                        tokens[nr_token].type = '+', strcpy(tokens[nr_token].str, " ");
+//                        break;
+                    case NUM:
+                        tokens[nr_token].type = rules[i].token_type, strncpy(tokens[nr_token].str, substr_start,
+                                                                             substr_len);
                         break;
-                    case '-':
-                        break;
-                    case '*':
-                        break;
-                    case '/':
-                        break;
-                    case NOTYPE:
-                        break;
-                    case EQ:
-                        break;
-
+                    default:
+                        tokens[nr_token].type = rules[i].token_type;
                 }
+                Log("%d", tokens[nr_token].type);
                 break;
             }
         }
