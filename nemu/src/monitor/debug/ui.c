@@ -89,10 +89,10 @@ static int count() {
                     if (tp == '-')stk_n[t_n] = b - a;
                     if (tp == '*')stk_n[t_n] = a * b;
                     if (tp == '/')stk_n[t_n] = b / a;
-                    if (tp == EQ)stk_n[t_n] = a == b;
-                    if (tp == NE)stk_n[t_n] = a != b;
-                    if (tp == AND)stk_n[t_n] = a && b;
-                    if (tp == OR)stk_n[t_n] = a || b;
+                    if (tp == EQ)stk_n[t_n] = (a == b);
+                    if (tp == NE)stk_n[t_n] = (a != b);
+                    if (tp == AND)stk_n[t_n] = (a && b);
+                    if (tp == OR)stk_n[t_n] = (a || b);
                 }
             } else {
                 while (t_op && getrank(stk_op[t_op]) > getrank(tokens[i].type)) {
