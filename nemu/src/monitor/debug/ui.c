@@ -77,8 +77,8 @@ int getrank(int tp) {
 static int count() {
     for (int i = 0; i < nr_token; ++i) {
 //        printf("%d\n", tokens[i].type == NOT);
+        puts("HERE");
         if (tokens[i].type < 256) {
-            puts("HERE");
             if (tokens[i].type == '(')stk_op[++t_op] = '(';
             else if (tokens[i].type == ')') {
                 while (t_op && stk_op[t_op--] != '(') {
