@@ -99,8 +99,7 @@ static int count() {
                     if (tp == AND)stk_n[t_n] = (a && b);
                     if (tp == OR)stk_n[t_n] = (a || b);
                 }
-            } else {        puts("here");
-
+            } else {
                 while (t_op && getrank(stk_op[t_op]) > getrank(tokens[i].type)) {
                     int tp = stk_op[t_op--];
                     printf("stk_op:    %d\n", tp);
@@ -120,6 +119,8 @@ static int count() {
                     if (tp == AND)stk_n[t_n] = a && b;
                     if (tp == OR)stk_n[t_n] = a || b;
                 }
+                puts("here");
+
                 stk_op[++t_op] = tokens[i].type;
             }
         } else {
