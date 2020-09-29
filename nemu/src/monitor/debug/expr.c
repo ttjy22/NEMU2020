@@ -28,7 +28,7 @@ static struct rule {
         {"\\*", '*'},                    // plus
         {"\\/", '/'},                    // plus
         {"\\(", '('},                    // plus
-        {"[^\\)]", ')'},                    // plus
+        {"\\)", ')'},                    // plus
         {"==",  EQ},                     // equal
         {"!=",  NQ}                        // equal
 };
