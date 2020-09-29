@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+
 //#include <cstring.h>
 void cpu_exec(uint32_t);
 
@@ -105,7 +106,7 @@ extern uint32_t expr(char *e, bool *success);
 static int cmd_p(char *args) {
     bool success;
     expr(args, &success);
-    if (success)count();
+    if (success)printf("%d\n", count());
     return 0;
 }
 
