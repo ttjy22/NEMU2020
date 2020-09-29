@@ -131,7 +131,10 @@ static int count() {
         int a = stk_n[t_n], b = 1;
         if (t_n)a = stk_n[t_n--], b = stk_n[t_n];
 //        if (tp == DEREF)stk_n[++t_n] = (*a);
-        if (tp == NOT)stk_n[++t_n] = !a;
+        if (tp == NOT){
+            printf("%d\n", a);
+            stk_n[++t_n] = !a;
+        }
         if (tp == '+')stk_n[t_n] = a + b;
         if (tp == '-')stk_n[t_n] = b - a;
         if (tp == '*')stk_n[t_n] = a * b;
