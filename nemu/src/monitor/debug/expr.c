@@ -7,7 +7,7 @@
 #include <regex.h>
 
 enum {
-    NOTYPE = 256, EQ, NQ, NUM
+    NOTYPE = 256, EQ, NQ, NUM, NOT, AND, OR, DEREF
 
     /* TODO: Add more token types */
 
@@ -29,9 +29,13 @@ static struct rule {
         {"\\/",               '/'},                    // plus
         {"\\(",               '('},                    // plus
         {"\\)",               ')'},                    // plus
-        {"(0|-?[1-9][0-9]*)", NUM},                    // plus
         {"==",                EQ},                     // equal
-        {"!=",                NQ}                        // equal
+        {"!=",                NQ},
+        {"(0|-?[1-9][0-9]*)", NUM},                    // plus
+        {"!",                 NOT},                     // equal
+        {"&&",                AND},                     // equal
+        {"||",                OR},
+        {"*",                 DEREF},                       // equal
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -74,10 +78,11 @@ static bool make_token(char *e) {
         /* Try all rules one by one. */
         for (i = 0; i < NR_REGEX; i++) {
             if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
-//                printf("%d\n", tokens[i - 2].type);
                 if (rules[i].token_type == '-' && *(e + position + 1) - '0' >= 0 && *(e + position + 1) - '9' <= 0 &&
                     (!i || tokens[i - 2].type != NUM)) {
-//                    printf("%s",(e + position + 1));
+                    continue;
+                }
+                if (rules[i].token_type == '*' &&(!i || (*(e + position + 1) - '0' < 0 && *(e + position + 1) - '9' > 0))) {
                     continue;
                 }
                 char *substr_start = e + position;
