@@ -54,7 +54,7 @@ extern int nr_token;
 #define N 33
 int stk_op[N], stk_n[N], t_op, t_n;
 enum {
-    NOT = 256, DEREF, EQ, NE, AND, OR, NOTYPE, NUM
+    NOT = 256, DEREF, EQ, NE, AND, OR, NOTYPE, NUM, HEC, REG, ALP
 
     /* TODO: Add more token types */
 
@@ -65,16 +65,18 @@ int getrank(int tp) {
     if (tp == '-')return 1;
     if (tp == '*')return 2;
     if (tp == '/')return 3;
-    if (tp == NOT)return 4;
-    if (tp == DEREF)return 5;
+    if (tp == OR)return 4;
+    if (tp == AND)return 5;
     if (tp == EQ)return 6;
     if (tp == NE)return 7;
-    if (tp == AND)return 8;
-    if (tp == OR)return 9;
+    if (tp == DEREF)return 8;
+    if (tp == NOT)return 9;
+    if (tp == HEC)return 10;
     return -1;
 }
 
-#define ALL_THE_OP {if (tp == '+')stk_n[t_n] = a + b;if (tp == '-')stk_n[t_n] = b - a;if (tp == '*')stk_n[t_n] = a * b;if (tp == '/')stk_n[t_n] = b / a;if (tp == EQ)stk_n[t_n] = a == b;if (tp == NE)stk_n[t_n] = a != b;if (tp == AND)stk_n[t_n] = (a && b);if (tp == OR)stk_n[t_n] = (a || b);}
+#define BIN_OP {int a = stk_n[t_n--], b = stk_n[t_n];if (tp == '+')stk_n[t_n] = a + b;if (tp == '-')stk_n[t_n] = b - a;if (tp == '*')stk_n[t_n] = a * b;if (tp == '/')stk_n[t_n] = b / a;if (tp == EQ)stk_n[t_n] = a == b;if (tp == NE)stk_n[t_n] = a != b;if (tp == AND)stk_n[t_n] = (a && b);if (tp == OR)stk_n[t_n] = (a || b);}
+#define CAL_HEC {int j=0;for (; tokens[++i].str[j]; ++j) {int base = 0;if (tokens[++i].str[j] >= 'a' && tokens[++i].str[j] <= 'f')base = tokens[++i].str[j] - 'a' + 10 + base * 16;else base = tokens[++i].str[j] - '0' + base * 16;stk_n[++t_n] = base;}}
 
 static int count() {
     for (int i = 0; i < nr_token; ++i) {
@@ -85,27 +87,24 @@ static int count() {
                 while (t_op && stk_op[t_op--] != '(') {
                     int tp = stk_op[t_op + 1];
 //                    printf("stk_op:    %d\n", tp);
-                    int a = stk_n[t_n], b = 1;
-                    if (t_n)a = stk_n[t_n--], b = stk_n[t_n];
-                    if (tp == DEREF)stk_n[++t_n] = *(atoi(tokens[++i].str) + hw_mem);
-                    if (tp == NOT) {
-                        stk_n[++t_n] = !atoi(tokens[++i].str);
-                    }
-                    ALL_THE_OP
+                    BIN_OP
                 }
             } else {
                 while (t_op && getrank(stk_op[t_op]) > getrank(tokens[i].type)) {
                     int tp = stk_op[t_op--];
 //                    printf("stk_op:    %d\n", tp);
-                    int a = stk_n[t_n], b = 1;
-                    if (t_n)a = stk_n[t_n--], b = stk_n[t_n];
-                    if (tp == DEREF)stk_n[++t_n] = *(atoi(tokens[++i].str) + hw_mem);
-                    if (tp == NOT) {
-                        stk_n[++t_n] = !atoi(tokens[++i].str);
-                    }
-                    ALL_THE_OP
+                    BIN_OP
                 }
-                stk_op[++t_op] = tokens[i].type;
+                int tp = tokens[i].type;
+                if (tp == DEREF)stk_n[++t_n] = *(atoi(tokens[++i].str) + hw_mem);
+                else if (tp == HEC) CAL_HEC
+                else if (tp == REG) {
+                    i++;
+//                    printf("%s\n", tokens[i].str);
+//                        if(!strcmp(tokens[i].str,"eax"))
+                } else if (tp == NOT) {
+                    stk_n[++t_n] = !atoi(tokens[++i].str);
+                } else stk_op[++t_op] = tp;
             }
         } else {
             stk_n[++t_n] = atoi(tokens[i].str);
@@ -115,13 +114,7 @@ static int count() {
     while (t_op) {
         int tp = stk_op[t_op--];
 //        printf("stk_op:    %d\n", tp);
-        int a = stk_n[t_n], b = 1;
-        if (t_n)a = stk_n[t_n--], b = stk_n[t_n];
-        if (tp == DEREF)stk_n[++t_n] = *(a + hw_mem);
-        if (tp == NOT) {
-            stk_n[++t_n] = !a;
-        }
-        ALL_THE_OP
+        BIN_OP
     }
     return stk_n[t_n];
 }
