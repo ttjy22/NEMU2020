@@ -37,7 +37,7 @@ static struct rule {
         {"!",                 NOT},                     // equal
         {"&&",                AND},                     // equal
         {"\\|\\|",            OR},
-        {"$",                 REG},
+        {"\\$",                 REG},
         {"(0|[1-9|a-f][0-9|a-f]*|[a-z]{3})",          ALP},
 };
 
