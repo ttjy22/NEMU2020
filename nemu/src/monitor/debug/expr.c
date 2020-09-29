@@ -83,7 +83,7 @@ static bool make_token(char *e) {
                     continue;
                 }
 //                i?printf("%s\n", tokens[i - 1].str):puts("");
-                printf("%d\n", rules[i].token_type == '*' && !i);
+                printf("%d\n", rules[i].token_type == '*');
                 if (rules[i].token_type == '*' && (!i || !strcmp(tokens[i - 1].str, "OP"))) {
                     continue;
                 }
