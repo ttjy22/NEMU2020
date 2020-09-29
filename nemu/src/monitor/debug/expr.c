@@ -74,10 +74,10 @@ static bool make_token(char *e) {
         /* Try all rules one by one. */
         for (i = 0; i < NR_REGEX; i++) {
             if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
-                printf("%d\n", rules[i].token_type == '-' );
-                printf("%d\n", *(e + position + 1) - '0' );
+//                printf("%d\n", rules[i].token_type == '-' );
+//                printf("%d\n", *(e + position + 1) - '0' );
 //                printf("%c\n", (e + position + 1) - '0' >= 0 && (e + position + 1) - '9' <= 0 );
-                if (rules[i].token_type == '-' && (e + position + 1) - '0' >= 0 && (e + position + 1) - '9' <= 0 &&
+                if (rules[i].token_type == '-' && *(e + position + 1) - '0' >= 0 && *(e + position + 1) - '9' <= 0 &&
                     (!i || tokens[i - 1].type != NUM)) {
                     printf("%s",(e + position + 1));
                     continue;
