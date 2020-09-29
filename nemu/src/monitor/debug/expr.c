@@ -79,10 +79,10 @@ static bool make_token(char *e) {
         for (i = 0; i < NR_REGEX; i++) {
             if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
                 if (rules[i].token_type == '-' && *(e + position + 1) - '0' >= 0 && *(e + position + 1) - '9' <= 0 &&
-                    (!i || tokens[i - 2].type != NUM)) {
+                    (!i || tokens[i - 1].type != NUM)) {
                     continue;
                 }
-                if (rules[i].token_type == '*' && (!i || !strcmp(tokens[i - 2].str, "OP"))) {
+                if (rules[i].token_type == '*' && (!i || !strcmp(tokens[i - 1].str, "OP"))) {
                     continue;
                 }
                 char *substr_start = e + position;
@@ -96,7 +96,6 @@ static bool make_token(char *e) {
                  * to record the token in the array `tokens'. For certain types
                  * of tokens, some extra actions should be performed.
                  */
-                nr_token++;
                 switch (rules[i].token_type) {
                     case NUM:
                         tokens[nr_token].type = rules[i].token_type, strcpy(tokens[nr_token].str, " "), strncpy(
@@ -110,6 +109,7 @@ static bool make_token(char *e) {
                 }
 //                Log("%d", tokens[nr_token].type);
 //                Log("%s", tokens[nr_token].str);
+                nr_token++;
                 break;
             }
         }
