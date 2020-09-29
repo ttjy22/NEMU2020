@@ -76,7 +76,7 @@ int getrank(int tp) {
 }
 
 #define BIN_OP {int a = stk_n[t_n--], b = stk_n[t_n];if (tp == '+')stk_n[t_n] = a + b;if (tp == '-')stk_n[t_n] = b - a;if (tp == '*')stk_n[t_n] = a * b;if (tp == '/')stk_n[t_n] = b / a;if (tp == EQ)stk_n[t_n] = a == b;if (tp == NE)stk_n[t_n] = a != b;if (tp == AND)stk_n[t_n] = (a && b);if (tp == OR)stk_n[t_n] = (a || b);}
-#define CAL_HEC {int j=0;for (; tokens[++i].str[j]; ++j) {int base = 0;if (tokens[++i].str[j] >= 'a' && tokens[++i].str[j] <= 'f')base = tokens[++i].str[j] - 'a' + 10 + base * 16;else base = tokens[++i].str[j] - '0' + base * 16;stk_n[++t_n] = base;}}
+#define CAL_HEC {int j=0;for (; tokens[++i].str[j]; ++j) {int base = 0;if (tokens[++i].str[j] >= 'a' && tokens[++i].str[j] <= 'f')base = tokens[i].str[j] - 'a' + 10 + base * 16;else base = tokens[i].str[j] - '0' + base * 16;stk_n[++t_n] = base;}}
 
 static int count() {
     for (int i = 0; i < nr_token; ++i) {
