@@ -73,7 +73,9 @@ int getrank(int tp) {
     if (tp == OR)return 9;
     return -1;
 }
+
 #define ALL_THE_OP {if (tp == '+')stk_n[t_n] = a + b;if (tp == '-')stk_n[t_n] = b - a;if (tp == '*')stk_n[t_n] = a * b;if (tp == '/')stk_n[t_n] = b / a;if (tp == EQ)stk_n[t_n] = a == b;if (tp == NE)stk_n[t_n] = a != b;if (tp == AND)stk_n[t_n] = (a && b);if (tp == OR)stk_n[t_n] = (a || b);}
+
 static int count() {
     for (int i = 0; i < nr_token; ++i) {
 //        printf("%d\n", tokens[i].type == NOT);
@@ -85,8 +87,8 @@ static int count() {
 //                    printf("stk_op:    %d\n", tp);
                     int a = stk_n[t_n], b = 1;
                     if (t_n)a = stk_n[t_n--], b = stk_n[t_n];
-//                    if (tp == DEREF)stk_n[++t_n] = (*a);
-                    if (tp == NOT){
+                    if (tp == DEREF)stk_n[++t_n] = *(atoi(tokens[++i].str) + hw_mem);
+                    if (tp == NOT) {
                         stk_n[++t_n] = !atoi(tokens[++i].str);
                     }
                     ALL_THE_OP
@@ -97,9 +99,9 @@ static int count() {
 //                    printf("stk_op:    %d\n", tp);
                     int a = stk_n[t_n], b = 1;
                     if (t_n)a = stk_n[t_n--], b = stk_n[t_n];
-//                    if (tp == DEREF)stk_n[++t_n] = (*a);
-                    if (tp == NOT){
-                        stk_n[++t_n]=!atoi(tokens[++i].str);
+                    if (tp == DEREF)stk_n[++t_n] = *(atoi(tokens[++i].str) + hw_mem);
+                    if (tp == NOT) {
+                        stk_n[++t_n] = !atoi(tokens[++i].str);
                     }
                     ALL_THE_OP
                 }
@@ -115,8 +117,8 @@ static int count() {
 //        printf("stk_op:    %d\n", tp);
         int a = stk_n[t_n], b = 1;
         if (t_n)a = stk_n[t_n--], b = stk_n[t_n];
-//        if (tp == DEREF)stk_n[++t_n] = (*a);
-        if (tp == NOT){
+        if (tp == DEREF)stk_n[++t_n] = *(a + hw_mem);
+        if (tp == NOT) {
             stk_n[++t_n] = !a;
         }
         ALL_THE_OP
