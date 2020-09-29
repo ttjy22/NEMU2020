@@ -79,12 +79,11 @@ static bool make_token(char *e) {
         for (i = 0; i < NR_REGEX; i++) {
             if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
                 if (rules[i].token_type == '-' && *(e + position + 1) - '0' >= 0 && *(e + position + 1) - '9' <= 0 &&
-                    (!i || tokens[i - 1].type != NUM)) {
+                    (!position || tokens[i - 1].type != NUM)) {
                     continue;
                 }
 //                i?printf("%s\n", tokens[i - 1].str):puts("");
-                printf("%d\n",  !i);
-                if (rules[i].token_type == '*' && (!i || !strcmp(tokens[i - 1].str, "OP"))) {
+                if (rules[i].token_type == '*' && (!position || !strcmp(tokens[i - 1].str, "OP"))) {
                     continue;
                 }
                 char *substr_start = e + position;
