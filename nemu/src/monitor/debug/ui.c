@@ -81,7 +81,7 @@ static int count() {
             else if (tokens[i].type == ')') {
                 while (t_op && stk_op[t_op--] != '(') {
                     int tp = stk_op[t_op + 1];
-//                    printf("stk_op:    %d\n", tp);
+                    printf("stk_op:    %d\n", tp);
                     int a = stk_n[t_n--], b = stk_n[t_n];
 //                    if (tp == DEREF)stk_n[++t_n] = (*a);
                     if (tp == NOT)stk_n[++t_n] = !a;
