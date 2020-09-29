@@ -24,7 +24,7 @@ static struct rule {
 
         {" +",              NOTYPE},                // spaces
         {"\\+",             '+'},                    // plus
-        {"\\-",             '-'},                    // plus
+        {"\\-^[1-9]",             '-'},                    // plus
         {"\\*",             '*'},                    // plus
         {"\\/",             '/'},                    // plus
         {"\\(",             '('},                    // plus
