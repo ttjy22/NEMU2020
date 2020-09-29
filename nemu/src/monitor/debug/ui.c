@@ -97,7 +97,7 @@ static int count() {
             } else {
                 while (t_op && getrank(stk_op[t_op]) > getrank(tokens[i].type)) {
                     int tp = stk_op[t_op--];
-//                    printf("stk_op:    %d\n", tp);
+                    printf("stk_op:    %d\n", tp);
                     int a = stk_n[t_n--], b = stk_n[t_n];
 //                    if (tp == DEREF)stk_n[++t_n] = (*a);
                     if (tp == NOT)stk_n[++t_n] = !a;
