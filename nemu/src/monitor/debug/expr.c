@@ -29,6 +29,7 @@ static struct rule {
         {"\\/",               '/'},                    // plus
         {"\\(",               '('},                    // plus
         {"\\)",               ')'},                    // plus
+        {"0x",                HEC},
         {"(0|-?[1-9][0-9]*)", NUM},                    // plus
         {"\\*",               DEREF},                       // equal
         {"==",                EQ},                     // equal
@@ -36,7 +37,6 @@ static struct rule {
         {"!",                 NOT},                     // equal
         {"&&",                AND},                     // equal
         {"\\|\\|",            OR},
-        {"0x",                HEC},
         {"$",                 REG},
         {"[a-z]{3}",          ALP},
 };
