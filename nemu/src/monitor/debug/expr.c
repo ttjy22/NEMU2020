@@ -112,6 +112,7 @@ static bool make_token(char *e) {
                         tokens[nr_token].type = rules[i].token_type;
                 }
                 Log("%d", tokens[nr_token].type);
+                Log("%s", tokens[nr_token].str);
                 break;
             }
         }
