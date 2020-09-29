@@ -78,6 +78,7 @@ static int count() {
     for (int i = 0; i < nr_token; ++i) {
 //        printf("%d\n", tokens[i].type == NOT);
         if (tokens[i].type < 256) {
+            puts("HERE");
             if (tokens[i].type == '(')stk_op[++t_op] = '(';
             else if (tokens[i].type == ')') {
                 while (t_op && stk_op[t_op--] != '(') {
@@ -95,7 +96,7 @@ static int count() {
             } else {
                 while (t_op && getrank(stk_op[t_op]) > getrank(tokens[i].type)) {
                     int tp = stk_op[t_op--];
-                    printf("stk_op:    %d\n", tp);
+//                    printf("stk_op:    %d\n", tp);
                     int a = stk_n[t_n], b = 1;
                     if (t_n)a = stk_n[t_n--], b = stk_n[t_n];
 //                    if (tp == DEREF)stk_n[++t_n] = (*a);
