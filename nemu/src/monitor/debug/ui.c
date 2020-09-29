@@ -104,7 +104,7 @@ static int count() {
 extern uint32_t expr(char *e, bool *success);
 
 static int cmd_p(char *args) {
-    bool success;
+    bool success=true;
     expr(args, &success);
     if (success)printf("%d\n", count());
     return 0;
