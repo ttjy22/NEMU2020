@@ -82,7 +82,8 @@ static bool make_token(char *e) {
                     (!i || tokens[i - 1].type != NUM)) {
                     continue;
                 }
-                i?printf("%s\n", tokens[i - 1].str):puts("");
+//                i?printf("%s\n", tokens[i - 1].str):puts("");
+                printf("%d\n", rules[i].token_type == '*' && !i);
                 if (rules[i].token_type == '*' && (!i || !strcmp(tokens[i - 1].str, "OP"))) {
                     continue;
                 }
