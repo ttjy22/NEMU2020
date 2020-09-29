@@ -105,8 +105,11 @@ static bool make_token(char *e) {
                         break;
                     default:
                         tokens[nr_token].type = rules[i].token_type;
-                        if (tokens[nr_token].type != '(' && tokens[nr_token].type != ')')
+                        if (tokens[nr_token].type != '(' && tokens[nr_token].type != ')'&& tokens[nr_token].type != NOTYPE)
+                        {
                             strcpy(tokens[nr_token].str, "OP");
+                            puts("OP");
+                        }
                 }
 //                Log("%d", tokens[nr_token].type);
 //                Log("%s", tokens[nr_token].str);
