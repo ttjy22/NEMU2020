@@ -29,7 +29,7 @@ static struct rule {
         {"\\/",         '/'},                    // plus
         {"\\(",         '('},                    // plus
         {"\\)",         ')'},                    // plus
-        {"[1-9][0-9]*", NUM},                    // plus
+        {"(0|[1-9][0-9]*)", NUM},                    // plus
         {"==",          EQ},                     // equal
         {"!=",          NQ}                        // equal
 };
