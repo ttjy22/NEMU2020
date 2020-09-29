@@ -54,7 +54,7 @@ extern int nr_token;
 #define N 33
 int stk_op[N], stk_n[N], t_op, t_n;
 enum {
-    NOT = 256, DEREF, EQ, NE, AND, OR, NOTYPE, NUM, HEC, REG, ALP
+    NOT = 256, DEREF, EQ, NE, AND, OR, NOTYPE, VAL, HEC, REG
 
     /* TODO: Add more token types */
 
@@ -82,7 +82,7 @@ int getrank(int tp) {
 static int count() {
     for (int i = 0; i < nr_token; ++i) {
 //        printf("%d\n", tokens[i].type == NOT);
-        if (tokens[i].type != NUM) {
+        if (tokens[i].type != VAL) {
             if (tokens[i].type == '(')stk_op[++t_op] = '(';
             else if (tokens[i].type == ')') {
                 while (t_op && stk_op[t_op--] != '(') {
