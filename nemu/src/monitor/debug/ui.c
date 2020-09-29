@@ -45,6 +45,13 @@ bool success;
 }
 
 static int cmd_help(char *args);
+static int cmd_p(char *args){
+
+    return 0;
+}
+//static int cmd_help(char *args);
+//static int cmd_help(char *args);
+//static int cmd_help(char *args);
 
 extern uint8_t *hw_mem;
 
@@ -87,9 +94,13 @@ static struct {
         {"help", "Display informations about all supported commands", cmd_help},
         {"c",    "Continue the execution of the program",             cmd_c},
         {"q",    "Exit NEMU",                                         cmd_q},
-        {"si",   "Step Into NEMU",                                    cmd_si},
-        {"info", "print NEMU",                                        cmd_info},
-        {"x",    "scan NEMU",                                         cmd_x},
+        {"si",   "Step Into",                                    cmd_si},
+        {"info", "print",                                        cmd_info},
+        {"x",    "scan",                                         cmd_x},
+        {"p",    "EXPR",                                         cmd_p},
+//        {"w",    "WATCH",                                         cmd_w},
+//        {"d",    "EXPR",                                         cmd_d},
+//        {"bt",    "EXPR",                                         cmd_bt},
 
         /* TODO: Add more commands */
 
