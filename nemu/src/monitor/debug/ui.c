@@ -73,7 +73,7 @@ int getrank(int tp) {
     if (tp == OR)return 9;
     return -1;
 }
-
+#define ALL_THE_OP {if (tp == '+')stk_n[t_n] = a + b;if (tp == '-')stk_n[t_n] = b - a;if (tp == '*')stk_n[t_n] = a * b;if (tp == '/')stk_n[t_n] = b / a;if (tp == EQ)stk_n[t_n] = a == b;if (tp == NE)stk_n[t_n] = a != b;if (tp == AND)stk_n[t_n] = a && b;if (tp == OR)stk_n[t_n] = a || b;}
 static int count() {
     for (int i = 0; i < nr_token; ++i) {
 //        printf("%d\n", tokens[i].type == NOT);
@@ -90,14 +90,7 @@ static int count() {
                         printf("%d\n", atoi(tokens[++i].str));
                         stk_n[++t_n] = !atoi(tokens[++i].str);
                     }
-                    if (tp == '+')stk_n[t_n] = a + b;
-                    if (tp == '-')stk_n[t_n] = b - a;
-                    if (tp == '*')stk_n[t_n] = a * b;
-                    if (tp == '/')stk_n[t_n] = b / a;
-                    if (tp == EQ)stk_n[t_n] = (a == b);
-                    if (tp == NE)stk_n[t_n] = (a != b);
-                    if (tp == AND)stk_n[t_n] = (a && b);
-                    if (tp == OR)stk_n[t_n] = (a || b);
+                    ALL_THE_OP
                 }
             } else {
                 while (t_op && getrank(stk_op[t_op]) > getrank(tokens[i].type)) {
@@ -110,17 +103,8 @@ static int count() {
                         printf("%d\n", atoi(tokens[++i].str));
                         stk_n[++t_n]=!atoi(tokens[++i].str);
                     }
-                    if (tp == '+')stk_n[t_n] = a + b;
-                    if (tp == '-')stk_n[t_n] = b - a;
-                    if (tp == '*')stk_n[t_n] = a * b;
-                    if (tp == '/')stk_n[t_n] = b / a;
-                    if (tp == EQ)stk_n[t_n] = a == b;
-                    if (tp == NE)stk_n[t_n] = a != b;
-                    if (tp == AND)stk_n[t_n] = a && b;
-                    if (tp == OR)stk_n[t_n] = a || b;
+                    ALL_THE_OP
                 }
-                puts("here");
-
                 stk_op[++t_op] = tokens[i].type;
             }
         } else {
@@ -138,14 +122,7 @@ static int count() {
             printf("%d\n", a);
             stk_n[++t_n] = !a;
         }
-        if (tp == '+')stk_n[t_n] = a + b;
-        if (tp == '-')stk_n[t_n] = b - a;
-        if (tp == '*')stk_n[t_n] = a * b;
-        if (tp == '/')stk_n[t_n] = b / a;
-        if (tp == EQ)stk_n[t_n] = a == b;
-        if (tp == NE)stk_n[t_n] = a != b;
-        if (tp == AND)stk_n[t_n] = a && b;
-        if (tp == OR)stk_n[t_n] = a || b;
+        ALL_THE_OP
     }
     return stk_n[t_n];
 }
