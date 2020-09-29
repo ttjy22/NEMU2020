@@ -87,23 +87,23 @@ static bool make_token(char *e) {
                  */
                 nr_token++;
                 switch (rules[i].token_type) {
-//                    case '+':
-//                        tokens[nr_token].type = '+', strcpy(tokens[nr_token].str, " ");
-//                        break;
-//                    case '-':
-//                        tokens[nr_token].type = '-', strcpy(tokens[nr_token].str, " ");
-//                        break;
-//                    case '*':
-//                        tokens[nr_token].type = '*', strcpy(tokens[nr_token].str, " ");
-//                        break;
-//                    case '/':
-//                        tokens[nr_token].type = '/', strcpy(tokens[nr_token].str, " ");
-//                        break;
-//                    case NOTYPE:
-//                        break;
-//                    case EQ:
-//                        tokens[nr_token].type = '+', strcpy(tokens[nr_token].str, " ");
-//                        break;
+                    case '+':
+                        tokens[nr_token].type = '+', strcpy(tokens[nr_token].str, "0");
+                        break;
+                    case '-':
+                        tokens[nr_token].type = '-', strcpy(tokens[nr_token].str, "1");
+                        break;
+                    case '*':
+                        tokens[nr_token].type = '*', strcpy(tokens[nr_token].str, "2");
+                        break;
+                    case '/':
+                        tokens[nr_token].type = '/', strcpy(tokens[nr_token].str, "3");
+                        break;
+                    case NOTYPE:
+                        break;
+                    case EQ:
+                        tokens[nr_token].type = '+', strcpy(tokens[nr_token].str, " ");
+                        break;
                     case NUM:
                         tokens[nr_token].type = rules[i].token_type, strncpy(tokens[nr_token].str, substr_start,
                                                                              substr_len);

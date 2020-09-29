@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-
+//#include <cstring.h>
 void cpu_exec(uint32_t);
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
@@ -35,20 +35,80 @@ static int cmd_c(char *args) {
 static int cmd_q(char *args) {
     return -1;
 }
-extern uint32_t expr(char *e, bool *success);
+
 static int cmd_si(char *args) {
-bool success;
-	expr(args,&success);
     if (!args)cpu_exec(1);
     else cpu_exec(atoi(args));
     return 0;
 }
 
 static int cmd_help(char *args);
-static int cmd_p(char *args){
 
+typedef struct token {
+    int type;
+    char str[32];
+} Token;
+extern Token tokens[32];
+extern int nr_token;
+#define N 33
+int stk_op[N], stk_n[N], t_op, t_n;
+
+int getrank(int tp) {
+    if (tp == '+')return 0;
+    if (tp == '-')return 1;
+    if (tp == '*')return 2;
+    if (tp == '/')return 3;
+    return -1;
+}
+
+static int count() {
+    for (int i = 0; i < nr_token; ++i) {
+        if (tokens[i].type < 256) {
+            if (tokens[i].type == '(')stk_op[++t_op] = '(';
+            else if (tokens[i].type == ')') {
+                while (stk_op[t_op--] != '(') {
+                    int tp = stk_op[t_op + 1];
+                    int a = stk_n[t_n--], b = stk_n[t_n];
+                    if (tp == '+')stk_n[t_n] = a + b;
+                    if (tp == '-')stk_n[t_n] = b - a;
+                    if (tp == '*')stk_n[t_n] = a * b;
+                    if (tp == '/')stk_n[t_n] = b / a;
+                }
+            } else {
+                while (getrank(stk_op[t_op]) > getrank(tokens[i].type)) {
+                    int tp = stk_op[t_op--];
+                    int a = stk_n[t_n--], b = stk_n[t_n];
+                    if (tp == '+')stk_n[t_n] = a + b;
+                    if (tp == '-')stk_n[t_n] = b - a;
+                    if (tp == '*')stk_n[t_n] = a * b;
+                    if (tp == '/')stk_n[t_n] = b / a;
+                }
+                stk_op[++t_op] = tokens[i].type;
+            }
+        } else {
+            stk_n[++t_n] = atoi(tokens[i].str);
+        }
+    }
+    while (t_op) {
+        int tp = stk_op[t_op--];
+        int a = stk_n[t_n--], b = stk_n[t_n];
+        if (tp == '+')stk_n[t_n] = a + b;
+        if (tp == '-')stk_n[t_n] = b - a;
+        if (tp == '*')stk_n[t_n] = a * b;
+        if (tp == '/')stk_n[t_n] = b / a;
+    }
+    return stk_n[t_n];
+}
+
+extern uint32_t expr(char *e, bool *success);
+
+static int cmd_p(char *args) {
+    bool success;
+    expr(args, &success);
+    if (success)count();
     return 0;
 }
+
 //static int cmd_help(char *args);
 //static int cmd_help(char *args);
 //static int cmd_help(char *args);
@@ -94,10 +154,10 @@ static struct {
         {"help", "Display informations about all supported commands", cmd_help},
         {"c",    "Continue the execution of the program",             cmd_c},
         {"q",    "Exit NEMU",                                         cmd_q},
-        {"si",   "Step Into",                                    cmd_si},
-        {"info", "print",                                        cmd_info},
-        {"x",    "scan",                                         cmd_x},
-        {"p",    "EXPR",                                         cmd_p},
+        {"si",   "Step Into",                                         cmd_si},
+        {"info", "print",                                             cmd_info},
+        {"x",    "scan",                                              cmd_x},
+        {"p",    "EXPR",                                              cmd_p},
 //        {"w",    "WATCH",                                         cmd_w},
 //        {"d",    "EXPR",                                         cmd_d},
 //        {"bt",    "EXPR",                                         cmd_bt},
