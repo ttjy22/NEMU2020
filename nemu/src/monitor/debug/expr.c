@@ -7,7 +7,7 @@
 #include <regex.h>
 
 enum {
-    NOT = 256, DEREF, EQ, NE, AND, OR ,NOTYPE, NUM
+    NOT = 256, DEREF, EQ, NE, AND, OR, NOTYPE, NUM
 
     /* TODO: Add more token types */
 
@@ -82,8 +82,7 @@ static bool make_token(char *e) {
                     (!i || tokens[i - 2].type != NUM)) {
                     continue;
                 }
-                if (rules[i].token_type == '*' && (!i || (tokens[i - 2].type != '+' && tokens[i - 2].type != '-' &&
-                                                          tokens[i - 2].type != '/' && tokens[i - 2].type != '*'))) {
+                if (rules[i].token_type == '*' && (!i || !strcmp(tokens[i - 2].str, "OP"))) {
                     continue;
                 }
                 char *substr_start = e + position;
@@ -106,6 +105,8 @@ static bool make_token(char *e) {
                         break;
                     default:
                         tokens[nr_token].type = rules[i].token_type;
+                        if (tokens[nr_token].type != '(' && tokens[nr_token].type != ')')
+                            strcpy(tokens[nr_token].str, "OP");
                 }
 //                Log("%d", tokens[nr_token].type);
 //                Log("%s", tokens[nr_token].str);
