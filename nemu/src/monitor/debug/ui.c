@@ -76,9 +76,9 @@ int getrank(int tp) {
 }
 
 #define BIN_OP {int a = stk_n[t_n--], b = stk_n[t_n];if (tp == '+')stk_n[t_n] = a + b;if (tp == '-')stk_n[t_n] = b - a;if (tp == '*')stk_n[t_n] = a * b;if (tp == '/')stk_n[t_n] = b / a;if (tp == EQ)stk_n[t_n] = a == b;if (tp == NE)stk_n[t_n] = a != b;if (tp == AND)stk_n[t_n] = (a && b);if (tp == OR)stk_n[t_n] = (a || b);}
-#define CAL_HEC {int j=0, base = 0;i++;for (; tokens[i].str[j]; ++j) {if (tokens[++i].str[j] >= 'a' && tokens[++i].str[j] <= 'f')base = tokens[i].str[j] - 'a' + 10 + base * 16;else base = tokens[i].str[j] - '0' + base * 16;stk_n[++t_n] = base;}}
 
 #include <string.h>
+
 static int count() {
     for (int i = 0; i < nr_token; ++i) {
 //        printf("%d\n", tokens[i].type == NOT);
@@ -98,17 +98,26 @@ static int count() {
                 }
                 int tp = tokens[i].type;
                 if (tp == DEREF)stk_n[++t_n] = *(atoi(tokens[++i].str) + hw_mem);
-                else if (tp == HEC) CAL_HEC
+                else if (tp == HEC) {
+                    int j = 0, base = 0;
+                    i++;
+                    for (; tokens[i].str[j]; ++j) {
+                        if (tokens[i].str[j] >= 'a' && tokens[i].str[j] <= 'f')
+                            base = tokens[i].str[j] - 'a' + 10 + base * 16;
+                        else base = tokens[i].str[j] - '0' + base * 16;
+                    }
+                    stk_n[++t_n] = base;
+                }
                 else if (tp == REG) {
                     i++;
-                    if(!strcmp("eax",tokens[i].str))stk_n[++t_n]=cpu.eax;
-                    if(!strcmp("ecx",tokens[i].str))stk_n[++t_n]=cpu.ecx;
-                    if(!strcmp("edx",tokens[i].str))stk_n[++t_n]=cpu.edx;
-                    if(!strcmp("esp",tokens[i].str))stk_n[++t_n]=cpu.esp;
-                    if(!strcmp("ebp",tokens[i].str))stk_n[++t_n]=cpu.ebp;
-                    if(!strcmp("esi",tokens[i].str))stk_n[++t_n]=cpu.esi;
-                    if(!strcmp("ebx",tokens[i].str))stk_n[++t_n]=cpu.ebx;
-                    if(!strcmp("edi",tokens[i].str))stk_n[++t_n]=cpu.edi;
+                    if (!strcmp("eax", tokens[i].str))stk_n[++t_n] = cpu.eax;
+                    if (!strcmp("ecx", tokens[i].str))stk_n[++t_n] = cpu.ecx;
+                    if (!strcmp("edx", tokens[i].str))stk_n[++t_n] = cpu.edx;
+                    if (!strcmp("esp", tokens[i].str))stk_n[++t_n] = cpu.esp;
+                    if (!strcmp("ebp", tokens[i].str))stk_n[++t_n] = cpu.ebp;
+                    if (!strcmp("esi", tokens[i].str))stk_n[++t_n] = cpu.esi;
+                    if (!strcmp("ebx", tokens[i].str))stk_n[++t_n] = cpu.ebx;
+                    if (!strcmp("edi", tokens[i].str))stk_n[++t_n] = cpu.edi;
                 } else if (tp == NOT) {
                     stk_n[++t_n] = !atoi(tokens[++i].str);
                 } else stk_op[++t_op] = tp;
