@@ -81,10 +81,10 @@ static bool make_token(char *e) {
                  * to record the token in the array `tokens'. For certain types
                  * of tokens, some extra actions should be performed.
                  */
-
+                nr_token++;
                 switch (rules[i].token_type) {
                     case '+':
-                        printf("+" );
+//                        tokens[i]=;
                         break;
                     case '-':
                         break;
@@ -118,7 +118,9 @@ uint32_t expr(char *e, bool *success) {
     }
 
     /* TODO: Insert codes to evaluate the expression. */
-    //panic("please implement me");
+    for (int i = 0; i < nr_token; ++i) {
+        if (tokens[i].type=='*');
+    }
     return 0;
 }
 
