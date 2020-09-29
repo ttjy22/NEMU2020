@@ -92,7 +92,7 @@ static bool make_token(char *e) {
 
                 Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s", i, rules[i].regex, position,
                     substr_len, substr_len, substr_start);
-//                i?printf("%d\n", tokens[i - 1].type):puts("");
+                i?printf("%d\n", tokens[i - 1].type):puts("");
 
                 position += substr_len;
 
