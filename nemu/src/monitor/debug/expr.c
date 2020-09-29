@@ -22,16 +22,16 @@ static struct rule {
          * Pay attention to the precedence level of different rules.
          */
 
-        {" +",              NOTYPE},                // spaces
-        {"\\+",             '+'},                    // plus
-        {"\\-[^1-9]",             '-'},                    // plus
-        {"\\*",             '*'},                    // plus
-        {"\\/",             '/'},                    // plus
-        {"\\(",             '('},                    // plus
-        {"\\)",             ')'},                    // plus
+        {" +",                NOTYPE},                // spaces
+        {"\\+",               '+'},                    // plus
+        {"\\-",               '-'},                    // plus
+        {"\\*",               '*'},                    // plus
+        {"\\/",               '/'},                    // plus
+        {"\\(",               '('},                    // plus
+        {"\\)",               ')'},                    // plus
         {"(0|-?[1-9][0-9]*)", NUM},                    // plus
-        {"==",              EQ},                     // equal
-        {"!=",              NQ}                        // equal
+        {"==",                EQ},                     // equal
+        {"!=",                NQ}                        // equal
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -74,6 +74,7 @@ static bool make_token(char *e) {
         /* Try all rules one by one. */
         for (i = 0; i < NR_REGEX; i++) {
             if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
+                if (rules[i].token_type == '-' && (!i || tokens[i - 1].type != NUM))continue;
                 char *substr_start = e + position;
                 int substr_len = pmatch.rm_eo;
 
