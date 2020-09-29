@@ -35,7 +35,7 @@ static struct rule {
         {"!=",                NE},
         {"!",                 NOT},                     // equal
         {"&&",                AND},                     // equal
-        {"||",                OR},
+        {"\\|\\|",                OR},
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
