@@ -76,7 +76,7 @@ static bool make_token(char *e) {
             if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
                 if (rules[i].token_type == '-' && (e + position + 1) - '0' >= 0 && (e + position + 1) - '9' <= 0 &&
                     (!i || tokens[i - 1].type != NUM)) {
-                    printf("hi\nq");
+                    printf("%s",(e + position + 1));
                     continue;
                 }
                 char *substr_start = e + position;
