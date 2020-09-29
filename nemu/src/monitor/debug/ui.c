@@ -82,9 +82,10 @@ static int count() {
                 while (t_op && stk_op[t_op--] != '(') {
                     int tp = stk_op[t_op + 1];
                     printf("stk_op:    %d\n", tp);
-                    int a = stk_n[t_n--], b = stk_n[t_n];
+                    int a = stk_n[t_n], b = 1;
+                    if (t_n)a = stk_n[t_n--], b = stk_n[t_n];
 //                    if (tp == DEREF)stk_n[++t_n] = (*a);
-                    if (tp == NOT)stk_n[++t_n] = !a;
+                    if (tp == NOT)stk_n[++t_n] = !atoi(tokens[++i].str);
                     if (tp == '+')stk_n[t_n] = a + b;
                     if (tp == '-')stk_n[t_n] = b - a;
                     if (tp == '*')stk_n[t_n] = a * b;
@@ -98,9 +99,10 @@ static int count() {
                 while (t_op && getrank(stk_op[t_op]) > getrank(tokens[i].type)) {
                     int tp = stk_op[t_op--];
                     printf("stk_op:    %d\n", tp);
-                    int a = stk_n[t_n--], b = stk_n[t_n];
+                    int a = stk_n[t_n], b = 1;
+                    if (t_n)a = stk_n[t_n--], b = stk_n[t_n];
 //                    if (tp == DEREF)stk_n[++t_n] = (*a);
-                    if (tp == NOT)stk_n[++t_n] = !a;
+                    if (tp == NOT)stk_n[++t_n]=!atoi(tokens[++i].str);
                     if (tp == '+')stk_n[t_n] = a + b;
                     if (tp == '-')stk_n[t_n] = b - a;
                     if (tp == '*')stk_n[t_n] = a * b;
@@ -120,7 +122,8 @@ static int count() {
     while (t_op) {
         int tp = stk_op[t_op--];
 //        printf("stk_op:    %d\n", tp);
-        int a = stk_n[t_n--], b = stk_n[t_n];
+        int a = stk_n[t_n], b = 1;
+        if (t_n)a = stk_n[t_n--], b = stk_n[t_n];
 //        if (tp == DEREF)stk_n[++t_n] = (*a);
         if (tp == NOT)stk_n[++t_n] = !a;
         if (tp == '+')stk_n[t_n] = a + b;
