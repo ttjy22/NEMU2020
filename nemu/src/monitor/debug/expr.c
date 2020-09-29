@@ -82,6 +82,7 @@ static bool make_token(char *e) {
             if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
                 if (rules[i].token_type == '-' && *(e + position + 1) - '0' >= 0 && *(e + position + 1) - '9' <= 0 &&
                     (!position || (i && tokens[i - 1].type != VAL))) {
+                    printf("%s\n", (e + position + 1));
                     continue;
                 }
                 if (rules[i].token_type == '*' && (!position || !strcmp(tokens[i - 1].str, "OP"))) {
@@ -90,8 +91,8 @@ static bool make_token(char *e) {
                 char *substr_start = e + position;
                 int substr_len = pmatch.rm_eo;
 
-//                Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s", i, rules[i].regex, position,
-//                    substr_len, substr_len, substr_start);
+                Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s", i, rules[i].regex, position,
+                    substr_len, substr_len, substr_start);
                 position += substr_len;
 
                 /* TODO: Now a new token is recognized with rules[i]. Add codes
