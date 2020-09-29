@@ -87,7 +87,6 @@ static int count() {
                     if (t_n)a = stk_n[t_n--], b = stk_n[t_n];
 //                    if (tp == DEREF)stk_n[++t_n] = (*a);
                     if (tp == NOT){
-                        printf("%d\n", atoi(tokens[++i].str));
                         stk_n[++t_n] = !atoi(tokens[++i].str);
                     }
                     ALL_THE_OP
@@ -100,7 +99,6 @@ static int count() {
                     if (t_n)a = stk_n[t_n--], b = stk_n[t_n];
 //                    if (tp == DEREF)stk_n[++t_n] = (*a);
                     if (tp == NOT){
-                        printf("%d\n", atoi(tokens[++i].str));
                         stk_n[++t_n]=!atoi(tokens[++i].str);
                     }
                     ALL_THE_OP
@@ -119,7 +117,6 @@ static int count() {
         if (t_n)a = stk_n[t_n--], b = stk_n[t_n];
 //        if (tp == DEREF)stk_n[++t_n] = (*a);
         if (tp == NOT){
-            printf("%d\n", a);
             stk_n[++t_n] = !a;
         }
         ALL_THE_OP
