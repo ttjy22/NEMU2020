@@ -67,7 +67,7 @@ static int count() {
         if (tokens[i].type < 256) {
             if (tokens[i].type == '(')stk_op[++t_op] = '(';
             else if (tokens[i].type == ')') {
-                while (stk_op[t_op--] != '(') {
+                while (t_op&&stk_op[t_op--] != '(') {
                     int tp = stk_op[t_op + 1];
                     int a = stk_n[t_n--], b = stk_n[t_n];
                     if (tp == '+')stk_n[t_n] = a + b;
@@ -76,7 +76,7 @@ static int count() {
                     if (tp == '/')stk_n[t_n] = b / a;
                 }
             } else {
-                while (getrank(stk_op[t_op]) > getrank(tokens[i].type)) {
+                while (t_op&&getrank(stk_op[t_op]) > getrank(tokens[i].type)) {
                     int tp = stk_op[t_op--];
                     int a = stk_n[t_n--], b = stk_n[t_n];
                     if (tp == '+')stk_n[t_n] = a + b;
