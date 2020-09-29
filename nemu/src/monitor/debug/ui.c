@@ -69,6 +69,7 @@ static int count() {
             else if (tokens[i].type == ')') {
                 while (t_op&&stk_op[t_op--] != '(') {
                     int tp = stk_op[t_op + 1];
+                    printf("stk_op:    %d\n", tp);
                     int a = stk_n[t_n--], b = stk_n[t_n];
                     if (tp == '+')stk_n[t_n] = a + b;
                     if (tp == '-')stk_n[t_n] = b - a;
@@ -78,6 +79,7 @@ static int count() {
             } else {
                 while (t_op&&getrank(stk_op[t_op]) > getrank(tokens[i].type)) {
                     int tp = stk_op[t_op--];
+                    printf("stk_op:    %d\n", tp);
                     int a = stk_n[t_n--], b = stk_n[t_n];
                     if (tp == '+')stk_n[t_n] = a + b;
                     if (tp == '-')stk_n[t_n] = b - a;
@@ -88,10 +90,12 @@ static int count() {
             }
         } else {
             stk_n[++t_n] = atoi(tokens[i].str);
+            printf("stk_n:    %d\n", stk_n[t_n]);
         }
     }
     while (t_op) {
         int tp = stk_op[t_op--];
+        printf("stk_op:    %d\n", tp);
         int a = stk_n[t_n--], b = stk_n[t_n];
         if (tp == '+')stk_n[t_n] = a + b;
         if (tp == '-')stk_n[t_n] = b - a;
