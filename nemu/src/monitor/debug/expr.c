@@ -82,9 +82,9 @@ static bool make_token(char *e) {
                     (!i || tokens[i - 2].type != NUM)) {
                     continue;
                 }
-//                if (rules[i].token_type == '*' &&(!i || (*(e + position + 1) - '0' < 0 && *(e + position + 1) - '9' > 0))) {
-//                    continue;
-//                }
+                if (rules[i].token_type == '*' &&(!i || (*(e + position + 1) - '0' < 0 && *(e + position + 1) - '9' > 0))) {
+                    continue;
+                }
                 char *substr_start = e + position;
                 int substr_len = pmatch.rm_eo;
 
