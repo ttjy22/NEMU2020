@@ -32,10 +32,10 @@ static struct rule {
         {"==",                EQ},                     // equal
         {"!=",                NQ},
         {"(0|-?[1-9][0-9]*)", NUM},                    // plus
-        {"!",                 NOT},                     // equal
-        {"&&",                AND},                     // equal
-        {"||",                OR},
-        {"*",                 DEREF},                       // equal
+//        {"!",                 NOT},                     // equal
+//        {"&&",                AND},                     // equal
+//        {"||",                OR},
+//        {"*",                 DEREF},                       // equal
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
