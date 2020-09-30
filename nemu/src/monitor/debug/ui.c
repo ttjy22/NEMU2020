@@ -168,14 +168,22 @@ static int cmd_x(char *args) {
 extern CPU_state cpu;
 
 static int cmd_info(char *args) {
-    printf("eax : 0x%x\n", cpu.eax);
-    printf("ecx : 0x%x\n", cpu.ecx);
-    printf("edx : 0x%x\n", cpu.edx);
-    printf("ebx : 0x%x\n", cpu.ebx);
-    printf("esp : 0x%x\n", cpu.esp);
-    printf("ebp : 0x%x\n", cpu.ebp);
-    printf("esi : 0x%x\n", cpu.esi);
-    printf("edi : 0x%x\n", cpu.edi);
+//    printf("eax : 0x%x\n", cpu.eax);
+//    printf("ecx : 0x%x\n", cpu.ecx);
+//    printf("edx : 0x%x\n", cpu.edx);
+//    printf("ebx : 0x%x\n", cpu.ebx);
+//    printf("esp : 0x%x\n", cpu.esp);
+//    printf("ebp : 0x%x\n", cpu.ebp);
+//    printf("esi : 0x%x\n", cpu.esi);
+//    printf("edi : 0x%x\n", cpu.edi);
+    printf("eax : %d\n", cpu.eax);
+    printf("ecx : %d\n", cpu.ecx);
+    printf("edx : %d\n", cpu.edx);
+    printf("ebx : %d\n", cpu.ebx);
+    printf("esp : %d\n", cpu.esp);
+    printf("ebp : %d\n", cpu.ebp);
+    printf("esi : %d\n", cpu.esi);
+    printf("edi : %d\n", cpu.edi);
     return 0;
 }
 
