@@ -189,7 +189,7 @@ static int cmd_x(char *args) {
 }
 
 extern CPU_state cpu;
-
+extern void watchpoints();
 static int cmd_info(char *args) {
     if (!strcmp(args, "r")) {
         printf("eax : 0x%x\n", cpu.eax);
@@ -202,7 +202,7 @@ static int cmd_info(char *args) {
         printf("edi : 0x%x\n", cpu.edi);
     }
     if (!strcmp(args, "w")) {
-
+        watchpoints();
     }
     return 0;
 }

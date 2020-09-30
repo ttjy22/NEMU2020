@@ -30,7 +30,7 @@ WP *new_wp() {
     assert(0);
     return NULL;
 }
-
+#include <stdlib.h>
 void free_wp(WP *wp) {
     WP *w = &wp_pool[wp->NO];
     if (free_) {
@@ -44,5 +44,16 @@ void free_wp(WP *wp) {
     else {
         while (h && h->next->NO != w->NO)h = h->next;
         h->next = h->next->next;
+    }
+    free(w);
+    free(h);
+}
+
+void watchpoints() {
+    WP *h = head;
+    puts("     Num       EXPRESSION ");
+    while (h) {
+        printf("     %d\n      %s", h->NO, h->express);
+        h = h->next;
     }
 }
