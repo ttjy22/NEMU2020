@@ -81,6 +81,7 @@ int getrank(int tp) {
 int count(char *args) {
     bool success = true;
     expr(args, &success);
+    printf("%d\n", nr_token);
     if (!success) return -1;
     for (int i = 0; i < nr_token; ++i) {
         if (tokens[i].type != VAL) {
