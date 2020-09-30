@@ -29,9 +29,9 @@ WP *new_wp() {
             head = free_;
             head->next = NULL;
         }
-        printf("%d\n", free_->NO);
+//        printf("%d\n", free_->NO);
         free_ = free_->next;
-        printf("%d\n", free_->NO);
+//        printf("%d\n", free_->NO);
         return head;
     }
     assert(0);
