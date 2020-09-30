@@ -31,9 +31,6 @@ WP *new_wp() {
             free_ = free_->next;
             head->next = NULL;
         }
-//        printf("%d\n", free_->NO);
-
-//        printf("%d\n", free_->NO);
         return head;
     }
     assert(0);
