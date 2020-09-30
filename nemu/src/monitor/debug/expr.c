@@ -22,22 +22,22 @@ static struct rule {
          * Pay attention to the precedence level of different rules.
          */
 
-        {" +",                                                        NOTYPE},                // spaces
-        {"\\+",                                                       '+'},                    // plus
-        {"\\-",                                                       '-'},                    // plus
-        {"\\*",                                                       '*'},                    // plus
-        {"\\/",                                                       '/'},                    // plus
-        {"\\(",                                                       '('},                    // plus
-        {"\\)",                                                       ')'},                    // plus
-        {"0x",                                                        HEC},
-        {"\\*",                                                       DEREF},                       // equal
-        {"==",                                                        EQ},                     // equal
-        {"!=",                                                        NE},
-        {"!",                                                         NOT},                     // equal
-        {"&&",                                                        AND},                     // equal
-        {"\\|\\|",                                                    OR},
-        {"\\$",                                                       REG},
-        {"(0|-?[1-9|a-f][0-9|a-f]*|[a-z]{3})", VAL},
+        {" +",                        NOTYPE},                // spaces
+        {"\\+",                       '+'},                    // plus
+        {"\\-",                       '-'},                    // plus
+        {"\\*",                       '*'},                    // plus
+        {"\\/",                       '/'},                    // plus
+        {"\\(",                       '('},                    // plus
+        {"\\)",                       ')'},                    // plus
+        {"0x",                        HEC},
+        {"\\*",                       DEREF},                       // equal
+        {"==",                        EQ},                     // equal
+        {"!=",                        NE},
+        {"!",                         NOT},                     // equal
+        {"&&",                        AND},                     // equal
+        {"\\|\\|",                    OR},
+        {"\\$[a-z]{3}",               REG},
+        {"(0|-?[1-9|a-f][0-9|a-f]*)", VAL},
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -103,6 +103,11 @@ static bool make_token(char *e) {
 
                 switch (rules[i].token_type) {
                     case VAL:
+                        tokens[nr_token].type = rules[i].token_type;
+                        memset(tokens[nr_token].str, 0, sizeof(tokens[nr_token].str));
+                        strncpy(tokens[nr_token].str, substr_start, substr_len);
+                        break;
+                    case REG:
                         tokens[nr_token].type = rules[i].token_type;
                         memset(tokens[nr_token].str, 0, sizeof(tokens[nr_token].str));
                         strncpy(tokens[nr_token].str, substr_start, substr_len);
