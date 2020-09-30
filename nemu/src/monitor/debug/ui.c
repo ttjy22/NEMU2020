@@ -137,7 +137,7 @@ int count(char *args) {
     printf("a\n");
     while (t_op) {
         int tp = stk_op[t_op--];
-        printf("%d\n", tp);
+        printf("%d\n", t_op);
 //        printf("stk_op:    %d\n", tp);
         BIN_OP
     }
