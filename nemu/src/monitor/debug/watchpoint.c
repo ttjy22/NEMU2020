@@ -33,13 +33,14 @@ WP *new_wp() {
 
 #include <stdlib.h>
 
-void free_wp(WP *wp) {
-    WP *w = &wp_pool[wp->NO];
+void free_wp(int no) {
+    WP *w = &wp_pool[no];
     if (free_) {
         w->next = free_;
         free_ = w;
     } else {
         free_ = w;
+        w->next = NULL;
     }
     WP *h = head;
     if (h->NO == w->NO) {

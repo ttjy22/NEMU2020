@@ -159,11 +159,10 @@ static int cmd_w(char *args) {
     return 0;
 }
 
-extern void free_wp(WP *wp);
+extern void free_wp(int no);
 
 static int cmd_d(char *args) {
-    WP t = {atoi(args), 0, ""};
-    free_wp(&t);
+    free_wp(atoi(args));
     return 0;
 }
 //static int cmd_bt(char *args){
