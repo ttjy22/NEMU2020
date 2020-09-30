@@ -68,3 +68,6 @@ void watchpoints() {
         h = h->next;
     }
 }
+WP *getHead(){
+    return head;
+}

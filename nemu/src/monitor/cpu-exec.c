@@ -38,14 +38,13 @@ void do_int3(int no) {
 
 extern void ui_mainloop();
 
-extern int tp;
-extern WP *wp;
-
 extern uint32_t expr(char *e, bool *success);
 
 extern bool suc;
 
 extern int count(char *args);
+
+WP *getHead();
 
 /* Simulate how the CPU works. */
 void cpu_exec(volatile uint32_t n) {
@@ -86,10 +85,14 @@ void cpu_exec(volatile uint32_t n) {
 #endif
 
         /* TODO: check watchpoints here. */
-        int tp = count(wp->express);
-        if ((tp != wp->res)) {
-            wp->res = tp;
-            do_int3(wp->NO);
+        WP *head = getHead();
+        while (head) {
+            int tp = count(head->express);
+            if ((tp != head->res)) {
+                head->res = tp;
+                do_int3(head->NO);
+            }
+            head = head->next;
         }
 #ifdef HAS_DEVICE
         extern void device_update();

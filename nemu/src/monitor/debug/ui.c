@@ -151,12 +151,9 @@ extern WP *new_wp();
 
 void ui_mainloop();
 
-int tp;
-WP *wp;
-bool suc;
-
 static int cmd_w(char *args) {
-    wp = new_wp();
+    WP *wp = new_wp();
+    bool suc;
     strcpy(wp->express, args);
     wp->res = expr(wp->express, &suc);
     return 0;
