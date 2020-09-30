@@ -40,7 +40,10 @@ void free_wp(WP *wp) {
         free_ = w;
     }
     WP *h = head;
-    if (h->NO == w->NO)head = head->next;
+    if (h->NO == w->NO){
+        head = head->next;
+        printf("%d\n", head->next->NO);
+    }
     else {
         while (h && h->next->NO != w->NO)h = h->next;
         h->next = h->next->next;
