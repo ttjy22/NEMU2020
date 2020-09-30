@@ -154,7 +154,6 @@ static int cmd_w(char *args) {
         cpu_exec(1);
     } while (expr(wp->express, &suc) == tp);
     do_int3();
-    cpu_exec(1);
     return 0;
 }
 //static int cmd_d(char *args){
