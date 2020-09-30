@@ -143,7 +143,7 @@ int count(char *args) {
 extern uint32_t expr(char *e, bool *success);
 
 static int cmd_p(char *args) {
-    printf("%d\n", count(args));
+    printf("0x%x\n", count(args));
     return 0;
 }
 
