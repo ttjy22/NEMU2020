@@ -22,7 +22,7 @@ void init_wp_pool() {
 WP *new_wp() {
     if (free_) {
         if (head) {
-            WP *tp = head->next;
+            WP *tp = head;
             head = free_;
             free_ = free_->next;
             head->next = tp;
