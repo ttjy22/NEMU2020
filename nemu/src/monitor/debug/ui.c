@@ -116,9 +116,11 @@ static int count() {
                     if (!strcmp("$ebx", tokens[i].str))stk_n[++t_n] = cpu.ebx,printf("%d\n",cpu.ebx);
                     if (!strcmp("$edi", tokens[i].str))stk_n[++t_n] = cpu.edi,printf("%d\n",cpu.edi);
                     if (!strcmp("$eip", tokens[i].str))stk_n[++t_n] = cpu.eip, printf("%d\n", cpu.eip);
+                    puts("----------");
                     printf("%d\n", strcmp("$eip", tokens[i].str));
                     printf("%s\n", tokens[i].str);
                     printf("%d\n", stk_n[t_n]);
+                    puts("----------");
                 } else if (tp == NOT) {
                     stk_n[++t_n] = !atoi(tokens[++i].str);
                 } else stk_op[++t_op] = tp;
