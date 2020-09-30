@@ -109,7 +109,7 @@ static bool make_token(char *e) {
                         break;
                     case REG:
                         tokens[nr_token].type = rules[i].token_type;
-                        printf("%d\n", rules[i].token_type==REG);
+//                        printf("%d\n", rules[i].token_type==REG);
                         memset(tokens[nr_token].str, 0, sizeof(tokens[nr_token].str));
                         strncpy(tokens[nr_token].str, substr_start, substr_len);
 //                        printf("%s", tokens[nr_token].str);
