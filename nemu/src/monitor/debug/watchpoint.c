@@ -32,10 +32,17 @@ WP *new_wp() {
 }
 
 void free_wp(WP *wp) {
+    WP *w = &wp_pool[wp->NO];
     if (free_) {
-        wp->next = free_;
-        free_ = wp;
+        w->next = free_;
+        free_ = w;
     } else {
-        free_ = wp;
+        free_ = w;
+    }
+    WP *h = head;
+    if (h->NO == w->NO)head = head->next;
+    else {
+        while (h && h->next->NO != w->NO)h = h->next;
+        h->next = h->next->next;
     }
 }

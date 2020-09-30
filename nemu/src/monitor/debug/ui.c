@@ -144,20 +144,28 @@ static int cmd_p(char *args) {
 extern WP *new_wp();
 
 void ui_mainloop();
+
 int tp;
 WP *wp;
 bool suc;
+
 static int cmd_w(char *args) {
     wp = new_wp();
     strcpy(wp->express, args);
     tp = expr(wp->express, &suc);
+    ui_mainloop();
     cpu_exec(-1);
     ui_mainloop();
     return 0;
 }
-//static int cmd_d(char *args){
-//
-//}
+
+extern void free_wp(WP *wp);
+
+static int cmd_d(char *args) {
+    WP t = {atoi(args), 0, ""};
+    free_wp(&t);
+    return 0;
+}
 //static int cmd_bt(char *args){
 //
 //}
@@ -213,7 +221,7 @@ static struct {
         {"x",    "scan",                                              cmd_x},
         {"p",    "EXPR",                                              cmd_p},
         {"w",    "WATCH",                                             cmd_w},
-//        {"d",    "EXPR",                                         cmd_d},
+        {"d",    "EXPR",                                              cmd_d},
 //        {"bt",    "EXPR",                                         cmd_bt},
 
         /* TODO: Add more commands */
