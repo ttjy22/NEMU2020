@@ -92,6 +92,7 @@ void cpu_exec(volatile uint32_t n) {
                 head->res = tp;
                 do_int3(head->NO);
             }
+            puts("--------------------------------");
             head = head->next;
         }
 #ifdef HAS_DEVICE
