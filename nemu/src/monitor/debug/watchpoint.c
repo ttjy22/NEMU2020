@@ -29,6 +29,7 @@ WP *new_wp() {
             head = free_;
             head->next = NULL;
         }
+        printf("%d\n", free_->NO);
         free_ = free_->next;
         return head;
     }
