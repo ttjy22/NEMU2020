@@ -24,13 +24,15 @@ WP *new_wp() {
         if (head) {
             WP *tp = head->next;
             head = free_;
+            free_ = free_->next;
             head->next = tp;
         } else {
             head = free_;
+            free_ = free_->next;
             head->next = NULL;
         }
 //        printf("%d\n", free_->NO);
-        free_ = free_->next;
+
 //        printf("%d\n", free_->NO);
         return head;
     }
