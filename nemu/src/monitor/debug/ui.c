@@ -153,9 +153,8 @@ void ui_mainloop();
 
 static int cmd_w(char *args) {
     WP *wp = new_wp();
-    bool suc;
     strcpy(wp->express, args);
-    wp->res = expr(wp->express, &suc);
+    wp->res = count(wp->express);
     return 0;
 }
 
