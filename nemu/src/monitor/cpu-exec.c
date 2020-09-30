@@ -35,11 +35,18 @@ void do_int3() {
 }
 
 #include "monitor/watchpoint.h"
+
 extern void ui_mainloop();
+
 extern int tp;
 extern WP *wp;
+
 extern uint32_t expr(char *e, bool *success);
+
 extern bool suc;
+
+extern int count(char *args);
+
 /* Simulate how the CPU works. */
 void cpu_exec(volatile uint32_t n) {
     if (nemu_state == END) {
@@ -79,7 +86,9 @@ void cpu_exec(volatile uint32_t n) {
 #endif
 
         /* TODO: check watchpoints here. */
-        if ((expr(wp->express, &suc) != wp->res)){
+        int tp = count(wp->express);
+        if ((tp != wp->res)) {
+            wp->res = tp;
             do_int3();
         }
 #ifdef HAS_DEVICE

@@ -78,7 +78,10 @@ int getrank(int tp) {
 
 #include <string.h>
 
-static int count() {
+int count(char *args) {
+    bool success = true;
+    expr(args, &success);
+    if (!success) return -1;
     for (int i = 0; i < nr_token; ++i) {
         if (tokens[i].type != VAL) {
             if (tokens[i].type == '(')stk_op[++t_op] = '(';
@@ -140,9 +143,7 @@ static int count() {
 extern uint32_t expr(char *e, bool *success);
 
 static int cmd_p(char *args) {
-    bool success = true;
-    expr(args, &success);
-    if (success)printf("%d\n", count());
+    printf("%d\n", count(args));
     return 0;
 }
 
