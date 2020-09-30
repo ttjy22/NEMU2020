@@ -143,9 +143,18 @@ static int cmd_p(char *args) {
 
 extern WP *new_wp();
 
+extern void do_int3();
+
 static int cmd_w(char *args) {
     WP *wp = new_wp();
     strcpy(wp->express, args);
+    bool suc;
+    int tp = expr(wp->express, &suc);
+    do {
+        cpu_exec(1);
+    } while (expr(wp->express, &suc) == tp);
+    do_int3();
+    cpu_exec(1);
     return 0;
 }
 //static int cmd_d(char *args){
@@ -176,14 +185,19 @@ static int cmd_x(char *args) {
 extern CPU_state cpu;
 
 static int cmd_info(char *args) {
-    printf("eax : 0x%x\n", cpu.eax);
-    printf("ecx : 0x%x\n", cpu.ecx);
-    printf("edx : 0x%x\n", cpu.edx);
-    printf("ebx : 0x%x\n", cpu.ebx);
-    printf("esp : 0x%x\n", cpu.esp);
-    printf("ebp : 0x%x\n", cpu.ebp);
-    printf("esi : 0x%x\n", cpu.esi);
-    printf("edi : 0x%x\n", cpu.edi);
+    if (!strcmp(args, "r")) {
+        printf("eax : 0x%x\n", cpu.eax);
+        printf("ecx : 0x%x\n", cpu.ecx);
+        printf("edx : 0x%x\n", cpu.edx);
+        printf("ebx : 0x%x\n", cpu.ebx);
+        printf("esp : 0x%x\n", cpu.esp);
+        printf("ebp : 0x%x\n", cpu.ebp);
+        printf("esi : 0x%x\n", cpu.esi);
+        printf("edi : 0x%x\n", cpu.edi);
+    }
+    if (!strcmp(args, "w")) {
+
+    }
     return 0;
 }
 

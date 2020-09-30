@@ -75,12 +75,7 @@ void cpu_exec(volatile uint32_t n) {
 #endif
 
         /* TODO: check watchpoints here. */
-//        if()
-        if (nemu_state == STOP) {
-            puts("reached  watch points");
-            ui_mainloop();
-        }
-
+        if (nemu_state == STOP)ui_mainloop();
 #ifdef HAS_DEVICE
         extern void device_update();
         device_update();
