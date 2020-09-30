@@ -43,21 +43,20 @@ WP *new_wp() {
 #include <stdlib.h>
 
 void free_wp(int no) {
-    WP *w = &wp_pool[no];
+    WP *w = &wp_pool[no], *h = head;
+    if (h->NO == w->NO) {
+        head = head->next;
+//        printf("%d\n", head->next->NO);
+    } else {
+        while (h && h->next->NO != w->NO)h = h->next;
+        h->next = h->next->next;
+    }
     if (free_) {
         w->next = free_;
         free_ = w;
     } else {
         free_ = w;
         w->next = NULL;
-    }
-    WP *h = head;
-    if (h->NO == w->NO) {
-        head = head->next;
-        printf("%d\n", head->next->NO);
-    } else {
-        while (h && h->next->NO != w->NO)h = h->next;
-        h->next = h->next->next;
     }
 }
 
