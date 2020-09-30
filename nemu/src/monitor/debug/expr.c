@@ -104,10 +104,10 @@ static bool make_token(char *e) {
 
                 switch (rules[i].token_type) {
                     case VAL:
-                        puts("yes");
-                        tokens[nr_token].type = rules[i].token_type, strcpy(tokens[nr_token].str, " "), strncpy(
-                                tokens[nr_token].str, substr_start,
-                                substr_len);
+                        tokens[nr_token].type = rules[i].token_type;
+                        strcpy(tokens[nr_token].str, " ");
+                        printf("%s\n", tokens[nr_token].str);
+                        strncpy(tokens[nr_token].str, substr_start, substr_len);
                         break;
                     default:
 //                        printf("%s", tokens[nr_token].str);
@@ -115,7 +115,7 @@ static bool make_token(char *e) {
                         if (tokens[nr_token].type != '(' && tokens[nr_token].type != ')' &&
                             tokens[nr_token].type != HEC && tokens[nr_token].type != REG &&
                             tokens[nr_token].type != NOTYPE) {
-                            strcpy(tokens[nr_token].str, " "),strcpy(tokens[nr_token].str, "OP");
+                            strcpy(tokens[nr_token].str, " "), strcpy(tokens[nr_token].str, "OP");
                         }
                 }
 //                Log("%d", tokens[nr_token].type);
