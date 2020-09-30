@@ -115,6 +115,7 @@ static int count() {
                     if (!strcmp("esi", tokens[i].str))stk_n[++t_n] = cpu.esi;
                     if (!strcmp("ebx", tokens[i].str))stk_n[++t_n] = cpu.ebx;
                     if (!strcmp("edi", tokens[i].str))stk_n[++t_n] = cpu.edi;
+                    if (!strcmp("eip", tokens[i].str))stk_n[++t_n] = cpu.eip;
                 } else if (tp == NOT) {
                     stk_n[++t_n] = !atoi(tokens[++i].str);
                 } else stk_op[++t_op] = tp;
@@ -196,6 +197,7 @@ static int cmd_info(char *args) {
         printf("ebp : 0x%x\n", cpu.ebp);
         printf("esi : 0x%x\n", cpu.esi);
         printf("edi : 0x%x\n", cpu.edi);
+        printf("eip : 0x%x\n", cpu.eip);
     }
     if (!strcmp(args, "w")) {
         watchpoints();
