@@ -10,7 +10,7 @@ void init_wp_pool() {
     int i;
     for (i = 0; i < NR_WP; i++) {
         wp_pool[i].NO = i;
-//        wp_pool[i].next = &wp_pool[i + 1];
+        wp_pool[i].next = &wp_pool[i + 1];
     }
     wp_pool[NR_WP - 1].next = NULL;
 
@@ -21,16 +21,18 @@ void init_wp_pool() {
 /* TODO: Implement the functionality of watchpoint */
 WP *new_wp() {
     if (free_) {
-        WP *tmp = free_->next;
-        free_->next = head;
+        WP *tp = head;
         head = free_;
-        free_ = tmp;
+        head->next = tp;
+        free_ = free_->next;
         return head;
     }
     assert(0);
     return NULL;
 }
+
 #include <stdlib.h>
+
 void free_wp(WP *wp) {
     WP *w = &wp_pool[wp->NO];
     if (free_) {
@@ -40,11 +42,10 @@ void free_wp(WP *wp) {
         free_ = w;
     }
     WP *h = head;
-    if (h->NO == w->NO){
+    if (h->NO == w->NO) {
         head = head->next;
         printf("%d\n", head->next->NO);
-    }
-    else {
+    } else {
         while (h && h->next->NO != w->NO)h = h->next;
         h->next = h->next->next;
     }
