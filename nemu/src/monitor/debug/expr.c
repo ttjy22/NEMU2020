@@ -106,6 +106,8 @@ static bool make_token(char *e) {
                     case VAL:
                         tokens[nr_token].type = rules[i].token_type;
                         strcpy(tokens[nr_token].str, " ");
+                        printf("%s\n", tokens[nr_token].str);
+                        puts("----------");
                         strncpy(tokens[nr_token].str, substr_start, substr_len);
                         printf("%s\n", tokens[nr_token].str);
                         break;
