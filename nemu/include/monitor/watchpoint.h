@@ -9,7 +9,7 @@ typedef struct watchpoint {
 
     /* TODO: Add more members if necessary */
     char express[60];
-
+    int res;
 } WP;
 
 #endif

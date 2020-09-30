@@ -152,10 +152,7 @@ bool suc;
 static int cmd_w(char *args) {
     wp = new_wp();
     strcpy(wp->express, args);
-    tp = expr(wp->express, &suc);
-    ui_mainloop();
-    cpu_exec(-1);
-    ui_mainloop();
+    wp->res = expr(wp->express, &suc);
     return 0;
 }
 
