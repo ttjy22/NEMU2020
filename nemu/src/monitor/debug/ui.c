@@ -7,7 +7,6 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-//#include <cstring.h>
 void cpu_exec(uint32_t);
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
@@ -142,9 +141,19 @@ static int cmd_p(char *args) {
     return 0;
 }
 
-//static int cmd_help(char *args);
-//static int cmd_help(char *args);
-//static int cmd_help(char *args);
+extern WP *new_wp();
+
+static int cmd_w(char *args) {
+    WP *wp = new_wp();
+    strcpy(wp->express, args);
+    return 0;
+}
+//static int cmd_d(char *args){
+//
+//}
+//static int cmd_bt(char *args){
+//
+//}
 
 extern uint8_t *hw_mem;
 
@@ -175,14 +184,6 @@ static int cmd_info(char *args) {
     printf("ebp : 0x%x\n", cpu.ebp);
     printf("esi : 0x%x\n", cpu.esi);
     printf("edi : 0x%x\n", cpu.edi);
-//    printf("eax : %d\n", cpu.eax);
-//    printf("ecx : %d\n", cpu.ecx);
-//    printf("edx : %d\n", cpu.edx);
-//    printf("ebx : %d\n", cpu.ebx);
-//    printf("esp : %d\n", cpu.esp);
-//    printf("ebp : %d\n", cpu.ebp);
-//    printf("esi : %d\n", cpu.esi);
-//    printf("edi : %d\n", cpu.edi);
     return 0;
 }
 
@@ -199,7 +200,7 @@ static struct {
         {"info", "print",                                             cmd_info},
         {"x",    "scan",                                              cmd_x},
         {"p",    "EXPR",                                              cmd_p},
-//        {"w",    "WATCH",                                         cmd_w},
+        {"w",    "WATCH",                                             cmd_w},
 //        {"d",    "EXPR",                                         cmd_d},
 //        {"bt",    "EXPR",                                         cmd_bt},
 
