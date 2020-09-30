@@ -59,12 +59,13 @@ void free_wp(int no) {
 
 void watchpoints() {
     WP *h = head;
-    puts("     Num       EXPRESSION ");
+    puts("     Num       EXPRESSION       RESULT");
     while (h) {
-        printf("      %d           %s\n", h->NO, h->express);
+        printf("      %d           %s           %d\n", h->NO, h->express, h->res);
         h = h->next;
     }
 }
-WP *getHead(){
+
+WP *getHead() {
     return head;
 }

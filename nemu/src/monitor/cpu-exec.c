@@ -47,6 +47,7 @@ extern int count(char *args);
 WP *getHead();
 
 /* Simulate how the CPU works. */
+int cnt;
 void cpu_exec(volatile uint32_t n) {
     if (nemu_state == END) {
         printf("Program execution has ended. To restart the program, exit NEMU and run again.\n");
@@ -92,7 +93,7 @@ void cpu_exec(volatile uint32_t n) {
                 head->res = tp;
                 do_int3(head->NO);
             }
-//            printf("%d\n", head->NO);
+            printf("%d\n", ++cnt);
             head = head->next;
         }
 #ifdef HAS_DEVICE

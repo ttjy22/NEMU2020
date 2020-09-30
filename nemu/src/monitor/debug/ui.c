@@ -100,7 +100,7 @@ int count(char *args) {
                 int tp = tokens[i].type;
                 if (tp == DEREF)stk_n[++t_n] = *(atoi(tokens[++i].str) + hw_mem);
                 else if (tp == HEC) {
-                    puts("-----------HEC-----------");
+//                    puts("-----------HEC-----------");
                     int j = 0, base = 0;
                     i++;
                     for (; tokens[i].str[j]; ++j) {
@@ -110,7 +110,7 @@ int count(char *args) {
                     }
                     stk_n[++t_n] = base;
                 } else if (tp == REG) {
-                    puts("-----------REG-----------");
+//                    puts("-----------REG-----------");
                     if (!strcmp("$eax", tokens[i].str))stk_n[++t_n] = cpu.eax;
                     if (!strcmp("$ecx", tokens[i].str))stk_n[++t_n] = cpu.ecx;
                     if (!strcmp("$edx", tokens[i].str))stk_n[++t_n] = cpu.edx;
