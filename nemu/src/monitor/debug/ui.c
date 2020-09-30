@@ -118,7 +118,7 @@ static int count() {
                     if (!strcmp("$eip", tokens[i].str))stk_n[++t_n] = cpu.eip, printf("%d\n", cpu.eip);
                     puts("----------");
                     printf("%d\n", strcmp("$eip", tokens[i].str));
-                    printf("%s\n", tokens[i].str);
+                    printf("%s\n", tokens[i-1].str);
                     printf("%d\n", stk_n[t_n]);
                     puts("----------");
                 } else if (tp == NOT) {
