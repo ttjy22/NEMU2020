@@ -28,11 +28,6 @@ void print_bin_instr(swaddr_t eip, int len) {
     sprintf(asm_buf + l, "%*.s", 50 - (12 + 3 * len), "");
 }
 
-/* This function will be called when an `int3' instruction is being executed. */
-void do_int3() {
-    printf("\nHit breakpoint at eip = 0x%08x\n", cpu.eip);
-    nemu_state = STOP;
-}
 
 #include "monitor/watchpoint.h"
 
@@ -40,6 +35,12 @@ extern void ui_mainloop();
 
 extern int tp;
 extern WP *wp;
+
+/* This function will be called when an `int3' instruction is being executed. */
+void do_int3() {
+    printf("\nNo: %d Hit breakpoint at eip = 0x%08x\n", wp->NO, cpu.eip);
+    nemu_state = STOP;
+}
 
 extern uint32_t expr(char *e, bool *success);
 
