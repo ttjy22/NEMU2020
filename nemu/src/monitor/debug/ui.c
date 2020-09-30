@@ -134,6 +134,7 @@ int count(char *args) {
 //            printf("stk_n:    %d\n", stk_n[t_n]);
         }
     }
+    printf("a\n");
     while (t_op) {
         int tp = stk_op[t_op--];
 //        printf("stk_op:    %d\n", tp);
