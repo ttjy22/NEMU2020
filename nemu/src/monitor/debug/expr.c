@@ -100,15 +100,16 @@ static bool make_token(char *e) {
                  * to record the token in the array `tokens'. For certain types
                  * of tokens, some extra actions should be performed.
                  */
+                printf("%s", tokens[nr_token].str);
+
                 switch (rules[i].token_type) {
                     case VAL:
-                        printf("%s", tokens[nr_token].str);
                         tokens[nr_token].type = rules[i].token_type, strcpy(tokens[nr_token].str, " "), strncpy(
                                 tokens[nr_token].str, substr_start,
                                 substr_len);
                         break;
                     default:
-                        printf("%s", tokens[nr_token].str);
+//                        printf("%s", tokens[nr_token].str);
                         tokens[nr_token].type = rules[i].token_type;
                         if (tokens[nr_token].type != '(' && tokens[nr_token].type != ')' &&
                             tokens[nr_token].type != HEC && tokens[nr_token].type != REG &&
