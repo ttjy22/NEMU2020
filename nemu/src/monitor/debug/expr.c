@@ -102,7 +102,7 @@ static bool make_token(char *e) {
                  */
                 switch (rules[i].token_type) {
                     case VAL:
-                        tokens[nr_token].type = rules[i].token_type, strcpy(tokens[nr_token].str, " "), strncpy(
+                        tokens[nr_token].type = rules[i].token_type, strcpy(tokens[nr_token].str, " "),printf("%s",tokens[nr_token].str), strncpy(
                                 tokens[nr_token].str, substr_start,
                                 substr_len);
                         break;
