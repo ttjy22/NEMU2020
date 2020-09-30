@@ -81,19 +81,18 @@ int getrank(int tp) {
 
 static int count() {
     for (int i = 0; i < nr_token; ++i) {
-//        printf("%d\n", tokens[i].type == NOT);
         if (tokens[i].type != VAL) {
             if (tokens[i].type == '(')stk_op[++t_op] = '(';
             else if (tokens[i].type == ')') {
                 while (t_op && stk_op[t_op--] != '(') {
                     int tp = stk_op[t_op + 1];
-//                    printf("stk_op:    %d\n", tp);
+                    printf("stk_op:    %d\n", tp);
                     BIN_OP
                 }
             } else {
                 while (t_op && getrank(stk_op[t_op]) > getrank(tokens[i].type)) {
                     int tp = stk_op[t_op--];
-//                    printf("stk_op:    %d\n", tp);
+                    printf("stk_op:    %d\n", tp);
                     BIN_OP
                 }
                 int tp = tokens[i].type;
@@ -124,12 +123,12 @@ static int count() {
             }
         } else {
             stk_n[++t_n] = atoi(tokens[i].str);
-//            printf("stk_n:    %d\n", stk_n[t_n]);
+            printf("stk_n:    %d\n", stk_n[t_n]);
         }
     }
     while (t_op) {
         int tp = stk_op[t_op--];
-//        printf("stk_op:    %d\n", tp);
+        printf("stk_op:    %d\n", tp);
         BIN_OP
     }
     return stk_n[t_n];
