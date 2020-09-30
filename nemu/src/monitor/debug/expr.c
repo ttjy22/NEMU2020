@@ -37,7 +37,7 @@ static struct rule {
         {"&&",                                 AND},                     // equal
         {"\\|\\|",                             OR},
         {"\\$",                                REG},
-        {"(0|-?[1-9|a-f][0-9|a-f]*|[a-z]{3})", VAL},
+        {"(0|-?[1-9|a-f][0-9|a-f]*|eax|ecx|edx|ebx|esp|ebp|esi|edi)", VAL},
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
