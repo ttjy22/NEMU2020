@@ -106,8 +106,7 @@ static int count() {
                         else base = tokens[i].str[j] - '0' + base * 16;
                     }
                     stk_n[++t_n] = base;
-                }
-                else if (tp == REG) {
+                } else if (tp == REG) {
                     i++;
                     if (!strcmp("eax", tokens[i].str))stk_n[++t_n] = cpu.eax;
                     if (!strcmp("ecx", tokens[i].str))stk_n[++t_n] = cpu.ecx;

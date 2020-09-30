@@ -22,21 +22,21 @@ static struct rule {
          * Pay attention to the precedence level of different rules.
          */
 
-        {" +",                                 NOTYPE},                // spaces
-        {"\\+",                                '+'},                    // plus
-        {"\\-",                                '-'},                    // plus
-        {"\\*",                                '*'},                    // plus
-        {"\\/",                                '/'},                    // plus
-        {"\\(",                                '('},                    // plus
-        {"\\)",                                ')'},                    // plus
-        {"0x",                                 HEC},
-        {"\\*",                                DEREF},                       // equal
-        {"==",                                 EQ},                     // equal
-        {"!=",                                 NE},
-        {"!",                                  NOT},                     // equal
-        {"&&",                                 AND},                     // equal
-        {"\\|\\|",                             OR},
-        {"\\$",                                REG},
+        {" +",                                                        NOTYPE},                // spaces
+        {"\\+",                                                       '+'},                    // plus
+        {"\\-",                                                       '-'},                    // plus
+        {"\\*",                                                       '*'},                    // plus
+        {"\\/",                                                       '/'},                    // plus
+        {"\\(",                                                       '('},                    // plus
+        {"\\)",                                                       ')'},                    // plus
+        {"0x",                                                        HEC},
+        {"\\*",                                                       DEREF},                       // equal
+        {"==",                                                        EQ},                     // equal
+        {"!=",                                                        NE},
+        {"!",                                                         NOT},                     // equal
+        {"&&",                                                        AND},                     // equal
+        {"\\|\\|",                                                    OR},
+        {"\\$",                                                       REG},
         {"(0|-?[1-9|a-f][0-9|a-f]*|eax|ecx|edx|ebx|esp|ebp|esi|edi)", VAL},
 };
 
@@ -91,9 +91,8 @@ static bool make_token(char *e) {
                 char *substr_start = e + position;
                 int substr_len = pmatch.rm_eo;
 
-                Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s", i, rules[i].regex, position,
-                    substr_len, substr_len, substr_start);
-//                i?printf("%d\n", tokens[i - 1].type):puts("");
+//                Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s", i, rules[i].regex, position,
+//                    substr_len, substr_len, substr_start);
 
                 position += substr_len;
 
