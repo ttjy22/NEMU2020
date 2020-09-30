@@ -81,7 +81,7 @@ static bool make_token(char *e) {
         for (i = 0; i < NR_REGEX; i++) {
 
             if (regexec(&re[i], e + position, 1, &pmatch, 0) == 0 && pmatch.rm_so == 0) {
-                printf("%d", rules[i].token_type);
+                printf("%d", VAL);
                 if (rules[i].token_type == '-' && *(e + position + 1) - '0' >= 0 && *(e + position + 1) - '9' <= 0 &&
                     (!nr_token || tokens[nr_token - 1].type != VAL)) {
                     continue;
