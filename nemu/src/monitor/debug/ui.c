@@ -100,6 +100,7 @@ int count(char *args) {
                 int tp = tokens[i].type;
                 if (tp == DEREF)stk_n[++t_n] = *(atoi(tokens[++i].str) + hw_mem);
                 else if (tp == HEC) {
+                    puts("----------------------");
                     int j = 0, base = 0;
                     i++;
                     for (; tokens[i].str[j]; ++j) {
