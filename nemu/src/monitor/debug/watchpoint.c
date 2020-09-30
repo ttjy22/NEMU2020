@@ -53,7 +53,7 @@ void watchpoints() {
     WP *h = head;
     puts("     Num       EXPRESSION ");
     while (h) {
-        printf("     %d\n      %s", h->NO, h->express);
+        printf("     %d      %s\n", h->NO, h->express);
         h = h->next;
     }
 }
