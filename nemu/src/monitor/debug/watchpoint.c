@@ -21,9 +21,14 @@ void init_wp_pool() {
 /* TODO: Implement the functionality of watchpoint */
 WP *new_wp() {
     if (free_) {
-        WP *tp = head;
-        head = free_;
-        head->next = tp;
+        if (head) {
+            WP *tp = head->next;
+            head = free_;
+            head->next = tp;
+        } else {
+            head = free_;
+            head->next = NULL;
+        }
         free_ = free_->next;
         return head;
     }
