@@ -79,7 +79,7 @@ void cpu_exec(volatile uint32_t n) {
 #endif
 
         /* TODO: check watchpoints here. */
-        if ((expr(wp->express, &suc) == tp)){
+        if ((expr(wp->express, &suc) != tp)){
             do_int3();
         }
 #ifdef HAS_DEVICE
