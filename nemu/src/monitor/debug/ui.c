@@ -143,17 +143,16 @@ static int cmd_p(char *args) {
 
 extern WP *new_wp();
 
-extern void do_int3();
-
+void ui_mainloop();
+int tp;
+WP *wp;
+bool suc;
 static int cmd_w(char *args) {
-    WP *wp = new_wp();
+    wp = new_wp();
     strcpy(wp->express, args);
-    bool suc;
-    int tp = expr(wp->express, &suc);
-    do {
-        cpu_exec(1);
-    } while (expr(wp->express, &suc) == tp);
-    do_int3();
+    tp = expr(wp->express, &suc);
+    cpu_exec(-1);
+    ui_mainloop();
     return 0;
 }
 //static int cmd_d(char *args){

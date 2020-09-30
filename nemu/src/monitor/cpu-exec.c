@@ -34,8 +34,12 @@ void do_int3() {
     nemu_state = STOP;
 }
 
+#include "monitor/watchpoint.h"
 extern void ui_mainloop();
-
+extern int tp;
+extern WP *wp;
+extern uint32_t expr(char *e, bool *success);
+extern bool suc;
 /* Simulate how the CPU works. */
 void cpu_exec(volatile uint32_t n) {
     if (nemu_state == END) {
@@ -75,7 +79,9 @@ void cpu_exec(volatile uint32_t n) {
 #endif
 
         /* TODO: check watchpoints here. */
-        if (nemu_state == STOP)ui_mainloop();
+        if ((expr(wp->express, &suc) == tp)){
+            do_int3();
+        }
 #ifdef HAS_DEVICE
         extern void device_update();
         device_update();
