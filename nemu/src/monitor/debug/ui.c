@@ -107,15 +107,15 @@ static int count() {
                     stk_n[++t_n] = base;
                 } else if (tp == REG) {
                     i++;
-                    if (!strcmp("$eax", tokens[i].str))stk_n[++t_n] = cpu.eax;
-                    if (!strcmp("$ecx", tokens[i].str))stk_n[++t_n] = cpu.ecx;
-                    if (!strcmp("$edx", tokens[i].str))stk_n[++t_n] = cpu.edx;
-                    if (!strcmp("$esp", tokens[i].str))stk_n[++t_n] = cpu.esp;
-                    if (!strcmp("$ebp", tokens[i].str))stk_n[++t_n] = cpu.ebp;
-                    if (!strcmp("$esi", tokens[i].str))stk_n[++t_n] = cpu.esi;
-                    if (!strcmp("$ebx", tokens[i].str))stk_n[++t_n] = cpu.ebx;
-                    if (!strcmp("$edi", tokens[i].str))stk_n[++t_n] = cpu.edi;
-                    if (!strcmp("$eip", tokens[i].str))stk_n[++t_n] = cpu.eip;
+                    if (!strcmp("$eax", tokens[i].str))stk_n[++t_n] = cpu.eax,printf("%d\n",cpu.eax);
+                    if (!strcmp("$ecx", tokens[i].str))stk_n[++t_n] = cpu.ecx,printf("%d\n",cpu.ecx);
+                    if (!strcmp("$edx", tokens[i].str))stk_n[++t_n] = cpu.edx,printf("%d\n",cpu.edx);
+                    if (!strcmp("$esp", tokens[i].str))stk_n[++t_n] = cpu.esp,printf("%d\n",cpu.esp);
+                    if (!strcmp("$ebp", tokens[i].str))stk_n[++t_n] = cpu.ebp,printf("%d\n",cpu.ebp);
+                    if (!strcmp("$esi", tokens[i].str))stk_n[++t_n] = cpu.esi,printf("%d\n",cpu.esi);
+                    if (!strcmp("$ebx", tokens[i].str))stk_n[++t_n] = cpu.ebx,printf("%d\n",cpu.ebx);
+                    if (!strcmp("$edi", tokens[i].str))stk_n[++t_n] = cpu.edi,printf("%d\n",cpu.edi);
+                    if (!strcmp("$eip", tokens[i].str))stk_n[++t_n] = cpu.eip,printf("%d\n",cpu.eip);
                 } else if (tp == NOT) {
                     stk_n[++t_n] = !atoi(tokens[++i].str);
                 } else stk_op[++t_op] = tp;
