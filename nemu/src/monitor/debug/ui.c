@@ -146,7 +146,10 @@ extern uint32_t expr(char *e, bool *success);
 
 static int cmd_p(char *args) {
 //    printf("0x%x\n", count(args));
+for(int i=0;i<100;i++) {
+    printf("%d:",i);
     printf("%d\n", count(args));
+}
     return 0;
 }
 
