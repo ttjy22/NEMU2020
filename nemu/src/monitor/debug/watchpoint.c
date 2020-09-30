@@ -45,8 +45,6 @@ void free_wp(WP *wp) {
         while (h && h->next->NO != w->NO)h = h->next;
         h->next = h->next->next;
     }
-    free(w);
-    free(h);
 }
 
 void watchpoints() {
