@@ -1,6 +1,6 @@
 ##### global settings #####
 
-.PHONY: nemu entry testcase kernel run gdb test submit clean
+.PHONY: nemu entry testcase kernel run gdb test submit clean count
 
 CC := gcc
 LD := ld
@@ -73,3 +73,5 @@ test: $(nemu_BIN) $(testcase_BIN) entry
 
 submit: clean
 	cd .. && zip -r $(STU_ID).zip $(shell pwd | grep -o '[^/]*$$')
+
+count:bash count.sh
