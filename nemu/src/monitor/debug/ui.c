@@ -74,7 +74,7 @@ int getrank(int tp) {
     return -1;
 }
 
-#define BIN_OP {int a = stk_n[t_n--], b = stk_n[t_n];if (tp == '+')stk_n[t_n] = a + b;if (tp == '-')stk_n[t_n] = b - a;if (tp == '*')stk_n[t_n] = a * b;if (tp == '/')stk_n[t_n] = b / a;if (tp == EQ)stk_n[t_n] = a == b;if (tp == NE)stk_n[t_n] = a != b;if (tp == AND)stk_n[t_n] = (a && b);if (tp == OR)stk_n[t_n] = (a || b);}
+#define BIN_OP {int a = stk_n[t_n--], b = stk_n[t_n];if (tp == '+')stk_n[t_n] = a + b;if (tp == '-')stk_n[t_n] = b - a;if (tp == '*')stk_n[t_n] = a * b;if (tp == '/')stk_n[t_n] = b / a;if (tp == EQ){stk_n[t_n] = a == b;puts("dead loop!");}if (tp == NE)stk_n[t_n] = a != b;if (tp == AND)stk_n[t_n] = (a && b);if (tp == OR)stk_n[t_n] = (a || b);}
 
 #include <string.h>
 
@@ -129,7 +129,7 @@ int count(char *args) {
                     stk_n[++t_n] = !atoi(tokens[++i].str);
                 } else {
                     stk_op[++t_op] = tp;
-                    printf("%d\n", tp==EQ);
+//                    printf("%d\n", tp==EQ);
                 }
             }
         } else {
