@@ -44,7 +44,7 @@ extern bool suc;
 
 extern int count(char *args);
 
-extern void watchpoints();
+//extern void watchpoints();
 
 WP *getHead();
 
@@ -91,7 +91,7 @@ void cpu_exec(volatile uint32_t n) {
         /* TODO: check watchpoints here. */
         WP *head = getHead();
         while (head) {
-            watchpoints();
+//            watchpoints();
             int tp = count(head->express);
             if ((tp != head->res)) {
                 head->res = tp;
