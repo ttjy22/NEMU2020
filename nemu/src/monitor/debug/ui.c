@@ -50,7 +50,7 @@ typedef struct token {
 } Token;
 extern Token tokens[32];
 extern int nr_token;
-#define N 100050
+#define N 32
 int stk_op[N], stk_n[N], t_op, t_n;
 enum {
     NOT = 256, DEREF, EQ, NE, AND, OR, NOTYPE, VAL, HEC, REG
@@ -149,7 +149,9 @@ int count(char *args) {
 //        printf("stk_op:    %d\n", tp);
     }
 //    printf("Done\n");
-    return stk_n[t_n];
+    int res = stk_n[t_n];
+    t_n = 0;
+    return res;
 }
 
 extern uint32_t expr(char *e, bool *success);
