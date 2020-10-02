@@ -203,8 +203,8 @@ static int cmd_x(char *args) {
 extern CPU_state cpu;
 
 extern void watchpoints();
-
-static int cmd_info(char *args) {
+// TODO 记得改回来
+int cmd_info(char *args) {
     if (!strcmp(args, "r")) {
         printf("eax : 0x%x\n", cpu.eax);
         printf("ecx : 0x%x\n", cpu.ecx);

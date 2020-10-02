@@ -50,7 +50,7 @@ WP *getHead();
 
 /* Simulate how the CPU works. */
 int cnt;
-
+extern int cmd_info(char *args);
 void cpu_exec(volatile uint32_t n) {
     if (nemu_state == END) {
         printf("Program execution has ended. To restart the program, exit NEMU and run again.\n");
@@ -94,7 +94,8 @@ void cpu_exec(volatile uint32_t n) {
 //            watchpoints();
             int tp = count(head->express);
             if ((tp != head->res)) {
-//                head->res = tp;
+                cmd_info("r");
+                head->res = tp;
                 do_int3(head->NO);
             }
 //            printf("执行次数： %d\n ", ++cnt);
