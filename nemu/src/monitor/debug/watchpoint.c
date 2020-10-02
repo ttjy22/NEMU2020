@@ -1,7 +1,7 @@
 #include "monitor/watchpoint.h"
 #include "monitor/expr.h"
 
-#define NR_WP 42
+#define NR_WP 32
 
 static WP wp_pool[NR_WP];
 static WP *head, *free_;
@@ -19,22 +19,36 @@ void init_wp_pool() {
 }
 
 /* TODO: Implement the functionality of watchpoint */
-WP *new_wp() {
-    if (free_) {
-        if (head) {
-            WP *tp = head;
-            head = free_;
-            free_ = free_->next;
-            head->next = tp;
-        } else {
-            head = free_;
-            free_ = free_->next;
-            head->next = NULL;
-        }
-        return head;
+//WP *new_wp() {
+//    if (free_) {
+//        if (head) {
+//            WP *tp = head;
+//            head = free_;
+//            free_ = free_->next;
+//            head->next = tp;
+//        } else {
+//            head = free_;
+//            free_ = free_->next;
+//            head->next = NULL;
+//        }
+//        return head;
+//    }
+//    assert(0);
+//    return NULL;
+//}
+WP* new_wp()
+{
+    WP *f,*p;
+    f = free_;
+    free_ = free_->next;
+    f->next = NULL;
+    p = head;
+    if (p == NULL){head = f;p = head;}
+    else {
+        while (p->next!=NULL)p=p->next;
+        p->next = f;
     }
-    assert(0);
-    return NULL;
+    return f;
 }
 
 #include <stdlib.h>
