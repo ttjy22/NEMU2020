@@ -130,11 +130,11 @@ int count(char *args) {
                 } else {
                     stk_op[++t_op] = tp;
 //                    printf("%d\n", tp==EQ);
+                    printf("%d\n", cnt++);
                 }
             }
         } else {
             stk_n[++t_n] = atoi(tokens[i].str);
-            printf("%d\n", cnt++);
 //            printf("stk_n:    %d\n", stk_n[t_n]);
         }
     }
