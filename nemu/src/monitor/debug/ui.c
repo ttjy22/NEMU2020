@@ -46,11 +46,11 @@ static int cmd_help(char *args);
 
 typedef struct token {
     int type;
-    char str[42];
+    char str[32];
 } Token;
 extern Token tokens[32];
 extern int nr_token;
-#define N 100000
+#define N 33
 int stk_op[N], stk_n[N], t_op, t_n;
 enum {
     NOT = 256, DEREF, EQ, NE, AND, OR, NOTYPE, VAL, HEC, REG
