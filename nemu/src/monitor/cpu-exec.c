@@ -94,7 +94,7 @@ void cpu_exec(volatile uint32_t n) {
 //            watchpoints();
             int tp = count(head->express);
             if ((tp != head->res)) {
-                cmd_info("r");
+//                cmd_info("r");
                 head->res = tp;
                 do_int3(head->NO);
             }
