@@ -129,7 +129,7 @@ int count(char *args) {
                     stk_n[++t_n] = !atoi(tokens[++i].str);
                 } else {
                     stk_op[++t_op] = tp;
-                    printf("%d\n", tp==EQ);
+//                    printf("%d\n", tp==EQ);
                 }
             }
         } else {
