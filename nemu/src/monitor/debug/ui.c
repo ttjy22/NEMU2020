@@ -139,10 +139,13 @@ int count(char *args) {
     }
 //    printf("a\n");
     while (t_op) {//死循环了
+        printf("%d\n", t_op);
         int tp = stk_op[t_op--];
-//        printf("%d\n", t_op);
+        printf("%d\n", t_op);
 //        printf("stk_op:    %d\n", tp);
         BIN_OP
+        printf("%d\n", t_op);
+//        printf("stk_op:    %d\n", tp);
     }
 //    printf("Done\n");
     return stk_n[t_n];
@@ -232,7 +235,7 @@ static struct {
         {"x",    "scan",                                              cmd_x},
         {"p",    "EXPR",                                              cmd_p},
         {"w",    "WATCH",                                             cmd_w},
-        {"d",    "EXPR",                                              cmd_d},
+        {"d",    "DELET WATCH POINT",                                 cmd_d},
 //        {"bt",    "EXPR",                                         cmd_bt},
 
         /* TODO: Add more commands */
