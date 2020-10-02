@@ -141,7 +141,7 @@ int count(char *args) {
     while (t_op) {//死循环了
         int tp = stk_op[t_op--];
 //        printf("%d\n", t_op);
-//        printf("stk_op:    %d\n", tp);
+        printf("stk_op:    %d\n", tp);
         BIN_OP
     }
 //    printf("Done\n");
