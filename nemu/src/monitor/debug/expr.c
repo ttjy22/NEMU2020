@@ -63,7 +63,7 @@ void init_regex() {
 
 typedef struct token {
     int type;
-    char str[32];
+    char str[42];
 } Token;
 
 Token tokens[42];
