@@ -50,7 +50,7 @@ typedef struct token {
 } Token;
 extern Token tokens[32];
 extern int nr_token;
-#define N 33
+#define N 100000
 int stk_op[N], stk_n[N], t_op, t_n;
 enum {
     NOT = 256, DEREF, EQ, NE, AND, OR, NOTYPE, VAL, HEC, REG
