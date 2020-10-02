@@ -40,7 +40,6 @@ WP *new_wp() {
             free_ = free_->next;
             head->next = NULL;
         }
-        watchpoints();
         return head;
     }
     assert(0);

@@ -44,10 +44,13 @@ extern bool suc;
 
 extern int count(char *args);
 
+extern void watchpoints();
+
 WP *getHead();
 
 /* Simulate how the CPU works. */
 int cnt;
+
 void cpu_exec(volatile uint32_t n) {
     if (nemu_state == END) {
         printf("Program execution has ended. To restart the program, exit NEMU and run again.\n");
@@ -88,6 +91,7 @@ void cpu_exec(volatile uint32_t n) {
         /* TODO: check watchpoints here. */
         WP *head = getHead();
         while (head) {
+            watchpoints();
             int tp = count(head->express);
             if ((tp != head->res)) {
                 head->res = tp;
