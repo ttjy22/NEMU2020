@@ -46,7 +46,7 @@ static int cmd_help(char *args);
 
 typedef struct token {
     int type;
-    char str[32];
+    char str[42];
 } Token;
 extern Token tokens[32];
 extern int nr_token;
