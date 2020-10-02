@@ -73,7 +73,7 @@ test: $(nemu_BIN) $(testcase_BIN) entry
 
 count: $(nemu_BIN) entry
 	$(call git_commit, "count")
-	bash count.sh $(nemu_BIN)
+	bash count.sh
 # count: $(call "count")
 # 	bash count.sh
 
