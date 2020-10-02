@@ -19,36 +19,32 @@ void init_wp_pool() {
 }
 
 /* TODO: Implement the functionality of watchpoint */
-//WP *new_wp() {
-//    if (free_) {
-//        if (head) {
-//            WP *tp = head;
-//            head = free_;
-//            free_ = free_->next;
-//            head->next = tp;
-//        } else {
-//            head = free_;
-//            free_ = free_->next;
-//            head->next = NULL;
-//        }
-//        return head;
-//    }
-//    assert(0);
-//    return NULL;
-//}
-WP* new_wp()
-{
-    WP *f,*p;
-    f = free_;
-    free_ = free_->next;
-    f->next = NULL;
-    p = head;
-    if (p == NULL){head = f;p = head;}
-    else {
-        while (p->next!=NULL)p=p->next;
-        p->next = f;
+void watchpoints() {
+    WP *h = head;
+    puts("     Num       EXPRESSION       RESULT");
+    while (h) {
+        printf("      %d           %s           %d\n", h->NO, h->express, h->res);
+        h = h->next;
     }
-    return f;
+}
+
+WP *new_wp() {
+    if (free_) {
+        if (head) {
+            WP *tp = head;
+            head = free_;
+            free_ = free_->next;
+            head->next = tp;
+        } else {
+            head = free_;
+            free_ = free_->next;
+            head->next = NULL;
+        }
+        watchpoints();
+        return head;
+    }
+    assert(0);
+    return NULL;
 }
 
 #include <stdlib.h>
@@ -71,14 +67,6 @@ void free_wp(int no) {
     }
 }
 
-void watchpoints() {
-    WP *h = head;
-    puts("     Num       EXPRESSION       RESULT");
-    while (h) {
-        printf("      %d           %s           %d\n", h->NO, h->express, h->res);
-        h = h->next;
-    }
-}
 
 WP *getHead() {
     return head;
