@@ -123,7 +123,7 @@ static bool make_token(char *e) {
                         if (tokens[nr_token].type != '(' && tokens[nr_token].type != ')' &&
                             tokens[nr_token].type != HEC && tokens[nr_token].type != REG &&
                             tokens[nr_token].type != NOTYPE) {
-                            strcpy(tokens[nr_token].str, " "), strcpy(tokens[nr_token].str, "OP");
+                            strcpy(tokens[nr_token].str, "OP"),tokens[nr_token].str[substr_len] = 0;
                         }
                 }
 //                Log("%d", tokens[nr_token].type);
