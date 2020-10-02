@@ -148,7 +148,8 @@ uint32_t expr(char *e, bool *success) {
     }
 
     /* TODO: Insert codes to evaluate the expression. */
-    for (int i = 0; i < nr_token; ++i) {
+    int i = 0;
+    for (; i < nr_token; ++i) {
         if (tokens[i].type == '*');
     }
     return 0;
