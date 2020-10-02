@@ -130,7 +130,7 @@ int count(char *args) {
                 } else {
                     stk_op[++t_op] = tp;
 //                    printf("%d\n", tp==EQ);
-                    printf("%d\n", cnt++);
+//                    printf("%d\n", cnt++);
                 }
             }
         } else {
@@ -139,13 +139,12 @@ int count(char *args) {
         }
     }
 //    printf("a\n");
-    int tp = stk_op[t_op];
-    while (t_op&&tp) {//死循环了
+    while (t_op) {//死循环了
 //        printf("%d\n", t_op);
+        int tp = stk_op[t_op--];
 //        printf("%d\n", t_op);
 //        printf("stk_op:    %d\n", tp);
         BIN_OP
-        tp = stk_op[t_op--];
 //        printf("%d\n", t_op);
 //        printf("stk_op:    %d\n", tp);
     }
