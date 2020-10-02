@@ -71,9 +71,9 @@ test: $(nemu_BIN) $(testcase_BIN) entry
 	$(call git_commit, "test")
 	bash test.sh $(testcase_BIN)
 
-count: $(nemu_BIN) $(YN_space) entry
+count: $(nemu_BIN) entry
 	$(call git_commit, "count")
-	bash count.sh $(YN_space)
+	bash count.sh 
 # count: $(call "count")
 # 	bash count.sh
 
