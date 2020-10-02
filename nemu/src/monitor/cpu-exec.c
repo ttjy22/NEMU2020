@@ -97,7 +97,7 @@ void cpu_exec(volatile uint32_t n) {
                 head->res = tp;
                 do_int3(head->NO);
             }
-            printf("-------%d\n---------", ++cnt);
+            printf("执行次数： %d\n ", ++cnt);
             head = head->next;
         }
 #ifdef HAS_DEVICE

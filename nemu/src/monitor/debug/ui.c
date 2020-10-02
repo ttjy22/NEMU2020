@@ -128,7 +128,7 @@ int count(char *args) {
                 } else if (tp == NOT) {
                     stk_n[++t_n] = !atoi(tokens[++i].str);
                 } else {
-                    stk_op[++t_op] = tp;
+                    stk_op[++t_op] = tp;//很多次
 //                    printf("%d\n", tp==EQ);
 //                    printf("%d\n", cnt++);
                 }
@@ -142,8 +142,8 @@ int count(char *args) {
     while (t_op) {//死循环了
 //        printf("%d\n", t_op);
         int tp = stk_op[t_op--];
-//        printf("t_op:      %d\n", t_op);//无穷大
-//        printf("stk_op:    %d\n", tp);//非法操作数0
+        printf("t_op:      %d\n", t_op);//无穷大
+        printf("stk_op:    %d\n", tp);//非法操作数0不是258
         BIN_OP
 //        printf("%d\n", t_op);
 //        printf("stk_op:    %d\n", tp);
