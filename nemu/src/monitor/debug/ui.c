@@ -127,7 +127,10 @@ int count(char *args) {
 //                    puts("----------");
                 } else if (tp == NOT) {
                     stk_n[++t_n] = !atoi(tokens[++i].str);
-                } else stk_op[++t_op] = tp;
+                } else {
+                    stk_op[++t_op] = tp;
+                    puts("here is a bug");
+                }
             }
         } else {
             stk_n[++t_n] = atoi(tokens[i].str);
@@ -135,13 +138,13 @@ int count(char *args) {
         }
     }
 //    printf("a\n");
-    while (t_op) {
+    while (t_op) {//死循环了
         int tp = stk_op[t_op--];
 //        printf("%d\n", t_op);
 //        printf("stk_op:    %d\n", tp);
         BIN_OP
     }
-    printf("Done\n");
+//    printf("Done\n");
     return stk_n[t_n];
 }
 
