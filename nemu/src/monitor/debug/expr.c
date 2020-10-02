@@ -63,7 +63,7 @@ void init_regex() {
 
 typedef struct token {
     int type;
-    char str[32];
+    char str[32];//千古奇案
 } Token;
 
 Token tokens[32];
@@ -121,9 +121,8 @@ static bool make_token(char *e) {
 //                        printf("%s", tokens[nr_token].str);
                         tokens[nr_token].type = rules[i].token_type;
                         if (tokens[nr_token].type != '(' && tokens[nr_token].type != ')' &&
-                            tokens[nr_token].type != HEC && tokens[nr_token].type != REG &&
-                            tokens[nr_token].type != NOTYPE) {
-                            strcpy(tokens[nr_token].str, "OP"),tokens[nr_token].str[substr_len] = 0;
+                            tokens[nr_token].type != HEC) {
+                            strcpy(tokens[nr_token].str, "OP"),tokens[nr_token].str[2] = 0;
                         }
                 }
 //                Log("%d", tokens[nr_token].type);
